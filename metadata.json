@@ -1,0 +1,6 @@
+{
+  "name": "Bilingual Reading Assistant",
+  "description": "An interactive template for learning English reading. Features bilingual text, text-to-speech, vocabulary lists, grammar notes, and comprehension quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
