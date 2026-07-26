@@ -106,6 +106,7 @@ export const sampleArticle: ArticleData = {
   vocabulary: [
     {
       word: "underestimate",
+      variants: ["underestimates", "underestimated", "underestimating"],
       phonetic: "/ˌʌndərˈestɪmeɪt/",
       partOfSpeech: "v.",
       definition: "to fail to guess or understand the real cost, size, difficulty, etc. of something",
@@ -115,6 +116,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "fashion",
+      variants: ["fashions", "fashioned", "fashioning"],
       phonetic: "/ˈfæʃən/",
       partOfSpeech: "v.",
       definition: "to make something using your hands",
@@ -124,6 +126,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "intricacy",
+      variants: ["intricacies"],
       phonetic: "/ˈɪntrɪkəsi/",
       partOfSpeech: "n.",
       definition: "the complicated details of something",
@@ -142,6 +145,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "perpetuated",
+      variants: ["perpetuate", "perpetuates", "perpetuating"],
       phonetic: "/pəˈpetʃueɪtɪd/",
       partOfSpeech: "v.",
       definition: "(past tense of perpetuate) to cause something to continue",
@@ -151,6 +155,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "stigmergy",
+      variants: ["stigmergic"],
       phonetic: "/ˈstɪɡmərdʒi/",
       partOfSpeech: "n.",
       definition: "a mechanism of indirect coordination through the environment",
@@ -160,6 +165,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "schism",
+      variants: ["schisms"],
       phonetic: "/ˈsɪzəm, ˈskɪz-/",
       partOfSpeech: "n.",
       definition: "a division into two groups caused by a disagreement about ideas",
@@ -178,6 +184,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "confounding",
+      variants: ["confound", "confounds", "confounded"],
       phonetic: "/kənˈfaʊndɪŋ/",
       partOfSpeech: "v.",
       definition: "(present participle of confound) to confuse and very much surprise someone",
@@ -187,6 +194,7 @@ export const sampleArticle: ArticleData = {
     },
     {
       word: "cumulatively",
+      variants: ["cumulative"],
       phonetic: "/ˈkjuːmjələtɪvli/",
       partOfSpeech: "adv.",
       definition: "in a way that increases by one addition after another",

@@ -50,7 +50,10 @@ const TextHighlighter = ({ text, vocabulary }: { text: string; vocabulary: Vocab
 
   sortedVocab.forEach(v => {
     const newParts: typeof parts = [];
-    const exactRegex = new RegExp(`(\\b${v.word}\\b)`, 'gi');
+    const wordsToMatch = [v.word, ...(v.variants || [])];
+    const escapeRegExp = (string: string) => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escapedWords = wordsToMatch.map(escapeRegExp);
+    const exactRegex = new RegExp(`(\\b(?:${escapedWords.join('|')})\\b)`, 'gi');
 
     parts.forEach(part => {
       if (part.isMatch) {
@@ -58,7 +61,7 @@ const TextHighlighter = ({ text, vocabulary }: { text: string; vocabulary: Vocab
       } else {
         const split = part.text.split(exactRegex);
         split.forEach(s => {
-          if (s.toLowerCase() === v.word.toLowerCase()) {
+          if (wordsToMatch.some(w => s.toLowerCase() === w.toLowerCase())) {
             newParts.push({ text: s, isMatch: true, vocab: v });
           } else if (s) {
             newParts.push({ text: s, isMatch: false });

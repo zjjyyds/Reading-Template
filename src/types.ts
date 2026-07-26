@@ -1,5 +1,6 @@
 export interface Vocabulary {
   word: string;
+  variants?: string[];
   phonetic: string;
   partOfSpeech: string;
   definition: string;
