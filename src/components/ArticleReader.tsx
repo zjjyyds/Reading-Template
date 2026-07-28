@@ -9,22 +9,27 @@ interface Props {
 }
 
 // Target Vocabulary Popover Component (Indigo Highlight)
-const VocabWord = ({ text, vocab }: { text: string; vocab: Vocabulary }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    const close = () => setIsOpen(false);
-    window.addEventListener('click', close);
-    return () => window.removeEventListener('click', close);
-  }, [isOpen]);
+const VocabWord = ({ 
+  text, 
+  vocab, 
+  id, 
+  activePopoverId, 
+  setActivePopoverId 
+}: { 
+  text: string; 
+  vocab: Vocabulary;
+  id: string;
+  activePopoverId: string | null;
+  setActivePopoverId: (id: string | null) => void;
+}) => {
+  const isOpen = activePopoverId === id;
 
   return (
     <span className="relative inline-block">
       <span 
         onClick={(e) => {
           e.stopPropagation();
-          setIsOpen(!isOpen);
+          setActivePopoverId(isOpen ? null : id);
         }}
         className="text-indigo-700 bg-indigo-50 border-b-2 border-indigo-200 cursor-pointer px-0.5 rounded transition-colors hover:bg-indigo-100 font-medium"
       >
@@ -49,26 +54,34 @@ const VocabWord = ({ text, vocab }: { text: string; vocab: Vocabulary }) => {
   );
 };
 
-// General Clickable Word Popover Component (Right Next to the Clicked Word)
-const DictWord = ({ word }: { word: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
+// General Clickable Word Popover Component
+const DictWord = ({ 
+  word, 
+  id, 
+  activePopoverId, 
+  setActivePopoverId 
+}: { 
+  word: string;
+  id: string;
+  activePopoverId: string | null;
+  setActivePopoverId: (id: string | null) => void;
+}) => {
+  const isOpen = activePopoverId === id;
   const [entry, setEntry] = useState<DictEntry | null>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
-    const close = () => setIsOpen(false);
-    window.addEventListener('click', close);
-    return () => window.removeEventListener('click', close);
-  }, [isOpen]);
+    if (isOpen && !entry) {
+      setEntry(lookupOfflineDict(word));
+    }
+  }, [isOpen, word, entry]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!isOpen) {
-      const res = lookupOfflineDict(word);
-      setEntry(res);
-      setIsOpen(true);
+      setEntry(lookupOfflineDict(word));
+      setActivePopoverId(id);
     } else {
-      setIsOpen(false);
+      setActivePopoverId(null);
     }
   };
 
@@ -124,15 +137,36 @@ const DictWord = ({ word }: { word: string }) => {
   );
 };
 
-const InteractiveText = ({ text }: { text: string }) => {
+const InteractiveText = ({ 
+  text,
+  pIndex,
+  tokenOffset,
+  activePopoverId,
+  setActivePopoverId
+}: { 
+  text: string;
+  pIndex: number;
+  tokenOffset: number;
+  activePopoverId: string | null;
+  setActivePopoverId: (id: string | null) => void;
+}) => {
   const tokens = text.split(/(\b[a-zA-Z0-9'-]+\b)/g);
 
   return (
     <span>
       {tokens.map((token, idx) => {
         const isWord = /^[a-zA-Z0-9'-]+$/.test(token) && !/^\d+$/.test(token);
+        const uniqueId = `word-${pIndex}-${tokenOffset}-${idx}-${token}`;
         if (isWord) {
-          return <DictWord key={idx} word={token} />;
+          return (
+            <DictWord 
+              key={uniqueId} 
+              word={token} 
+              id={uniqueId}
+              activePopoverId={activePopoverId}
+              setActivePopoverId={setActivePopoverId}
+            />
+          );
         }
         return <span key={idx}>{token}</span>;
       })}
@@ -142,10 +176,16 @@ const InteractiveText = ({ text }: { text: string }) => {
 
 const TextHighlighter = ({ 
   text, 
-  vocabulary 
+  vocabulary,
+  pIndex,
+  activePopoverId,
+  setActivePopoverId
 }: { 
   text: string; 
   vocabulary: Vocabulary[];
+  pIndex: number;
+  activePopoverId: string | null;
+  setActivePopoverId: (id: string | null) => void;
 }) => {
   const sortedVocab = [...vocabulary].sort((a, b) => b.word.length - a.word.length);
   
@@ -177,13 +217,28 @@ const TextHighlighter = ({
 
   return (
     <span>
-      {parts.map((part, i) => 
-        part.isMatch && part.vocab ? (
-          <VocabWord key={i} text={part.text} vocab={part.vocab} />
+      {parts.map((part, i) => {
+        const uniqueId = `vocab-${pIndex}-${i}-${part.text}`;
+        return part.isMatch && part.vocab ? (
+          <VocabWord 
+            key={uniqueId} 
+            text={part.text} 
+            vocab={part.vocab}
+            id={uniqueId}
+            activePopoverId={activePopoverId}
+            setActivePopoverId={setActivePopoverId}
+          />
         ) : (
-          <InteractiveText key={i} text={part.text} />
-        )
-      )}
+          <InteractiveText 
+            key={i} 
+            text={part.text} 
+            pIndex={pIndex}
+            tokenOffset={i}
+            activePopoverId={activePopoverId}
+            setActivePopoverId={setActivePopoverId}
+          />
+        );
+      })}
     </span>
   );
 };
@@ -191,6 +246,15 @@ const TextHighlighter = ({
 export default function ArticleReader({ article, showChinese }: Props) {
   const [activeParagraph, setActiveParagraph] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
+  const [activePopoverId, setActivePopoverId] = useState<string | null>(null);
+
+  // Close active popover when clicking anywhere outside
+  useEffect(() => {
+    if (!activePopoverId) return;
+    const handleGlobalClick = () => setActivePopoverId(null);
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, [activePopoverId]);
 
   const toggleSpeak = (text: string, id: string) => {
     if (!('speechSynthesis' in window)) return;
@@ -288,6 +352,9 @@ export default function ArticleReader({ article, showChinese }: Props) {
                     <TextHighlighter 
                       text={p.english} 
                       vocabulary={article.vocabulary} 
+                      pIndex={index}
+                      activePopoverId={activePopoverId}
+                      setActivePopoverId={setActivePopoverId}
                     />
                   </p>
                   
