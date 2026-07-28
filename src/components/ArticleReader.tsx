@@ -67,33 +67,10 @@ const DictWord = ({
   setActivePopoverId: (id: string | null) => void;
 }) => {
   const isOpen = activePopoverId === id;
-  const [entry, setEntry] = useState<DictEntry | null>(null);
-
-  useEffect(() => {
-    if (isOpen && (!entry || entry.word !== word)) {
-      // Fast initial offline check
-      const local = lookupOfflineDict(word);
-      setEntry(local);
-      
-      // Async dual-engine fetch if needed
-      fetchWordDefinition(word).then(res => {
-        setEntry(res);
-      });
-    }
-  }, [isOpen, word, entry]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!isOpen) {
-      const local = lookupOfflineDict(word);
-      setEntry(local);
-      setActivePopoverId(id);
-      fetchWordDefinition(word).then(res => {
-        setEntry(res);
-      });
-    } else {
-      setActivePopoverId(null);
-    }
+    setActivePopoverId(isOpen ? null : id);
   };
 
   const speak = (e: React.MouseEvent, w: string) => {
@@ -105,6 +82,8 @@ const DictWord = ({
       window.speechSynthesis.speak(utterance);
     }
   };
+
+  const entry = isOpen ? lookupOfflineDict(word) : null;
 
   return (
     <span className="relative inline-block">

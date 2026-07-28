@@ -6,7 +6,7 @@ export interface DictEntry {
 }
 
 export const offlineDict: Record<string, DictEntry> = {
-  // A
+  // Articles & Pronouns & Prepositions & Common Words
   "a": { word: "a", pos: "art.", translation: "一个，一" },
   "an": { word: "an", pos: "art.", translation: "一个，一" },
   "the": { word: "the", pos: "art.", translation: "这个，那个，这些" },
@@ -49,458 +49,364 @@ export const offlineDict: Record<string, DictEntry> = {
   "does": { word: "do", pos: "v.", translation: "做，干（第三人称单数）" },
   "did": { word: "do", pos: "v.", translation: "做，干（过去式）" },
 
-  "accomplishment": { word: "accomplishment", phonetic: "/əˈkʌm.plɪʃ.mənt/", pos: "n.", translation: "成就，完成" },
-  "achievement": { word: "achievement", phonetic: "/əˈtʃiːv.mənt/", pos: "n.", translation: "成就，成绩" },
+  // Comprehensive 考研 / CET4 / CET6 / IELTS / Core Vocabulary
+  "abandon": { word: "abandon", phonetic: "/əˈbæn.dən/", pos: "v.", translation: "放弃，抛弃" },
+  "ability": { word: "ability", phonetic: "/əˈbɪl.ə.ti/", pos: "n.", translation: "能力，本领" },
+  "able": { word: "able", phonetic: "/ˈeɪ.bəl/", pos: "adj.", translation: "有能力的，能...的" },
+  "abroad": { word: "abroad", phonetic: "/əˈbrɔːd/", pos: "adv.", translation: "在国外，出国" },
+  "absence": { word: "absence", phonetic: "/ˈæb.səns/", pos: "n.", translation: "缺席，不存在" },
+  "absent": { word: "absent", phonetic: "/ˈæb.sənt/", pos: "adj.", translation: "缺席的，心不在焉的" },
+  "absolute": { word: "absolute", phonetic: "/ˈæb.sə.luːt/", pos: "adj.", translation: "绝对的，完全的" },
+  "absolutely": { word: "absolutely", phonetic: "/ˈæb.sə.luːt.li/", pos: "adv.", translation: "绝对地，完全地" },
+  "absorb": { word: "absorb", phonetic: "/əbˈzɔːb/", pos: "v.", translation: "吸收，吸引注意力" },
+  "abstract": { word: "abstract", phonetic: "/ˈæb.strækt/", pos: "adj./n.", translation: "抽象的；摘要" },
+  "abundant": { word: "abundant", phonetic: "/əˈbʌn.dənt/", pos: "adj.", translation: "丰富的，充裕的" },
+  "abuzz": { word: "abuzz", phonetic: "/əˈbʌz/", pos: "adj.", translation: "议论纷纷，嘈杂热烈的" },
   "academic": { word: "academic", phonetic: "/ˌæk.əˈdem.ɪk/", pos: "adj.", translation: "学术的，教学的" },
+  "academy": { word: "academy", phonetic: "/əˈkæd.ə.mi/", pos: "n.", translation: "研究院，学会" },
+  "accelerate": { word: "accelerate", phonetic: "/əkˈsel.ə.reɪt/", pos: "v.", translation: "加速，促进" },
+  "accent": { word: "accent", phonetic: "/ˈæk.sənt/", pos: "n.", translation: "口音，重音" },
+  "accept": { word: "accept", phonetic: "/əkˈsept/", pos: "v.", translation: "接受，认可" },
+  "acceptable": { word: "acceptable", phonetic: "/əkˈsep.tə.bəl/", pos: "adj.", translation: "可接受的，合意的" },
+  "access": { word: "access", phonetic: "/ˈæk.ses/", pos: "n./v.", translation: "通道，使用权；获取" },
+  "accessible": { word: "accessible", phonetic: "/əkˈses.ə.bəl/", pos: "adj.", translation: "易接近的，易获得的" },
+  "accident": { word: "accident", phonetic: "/ˈæk.sɪ.dənt/", pos: "n.", translation: "事故，意外" },
+  "acclaim": { word: "acclaim", phonetic: "/əˈkleɪm/", pos: "v./n.", translation: "欢呼，赞誉" },
+  "accommodate": { word: "accommodate", phonetic: "/əˈkɒm.ə.deɪt/", pos: "v.", translation: "提供住宿，适应" },
   "accompany": { word: "accompany", phonetic: "/əˈkʌm.pə.ni/", pos: "v.", translation: "陪伴，伴随，随同" },
+  "accomplish": { word: "accomplish", phonetic: "/əˈkʌm.plɪʃ/", pos: "v.", translation: "完成，实现" },
+  "accomplishment": { word: "accomplishment", phonetic: "/əˈkʌm.plɪʃ.mənt/", pos: "n.", translation: "成就，完成" },
+  "accord": { word: "accord", phonetic: "/əˈkɔːd/", pos: "n./v.", translation: "一致，协议；给予" },
+  "accordance": { word: "accordance", phonetic: "/əˈkɔː.dəns/", pos: "n.", translation: "一致，依照" },
+  "according": { word: "according", phonetic: "/əˈkɔː.dɪŋ/", pos: "prep.", translation: "according to 按照，根据" },
+  "account": { word: "account", phonetic: "/əˈkaʊnt/", pos: "n./v.", translation: "账户，账目；说明" },
+  "accountant": { word: "accountant", phonetic: "/əˈkaʊn.tənt/", pos: "n.", translation: "会计师" },
+  "accumulate": { word: "accumulate", phonetic: "/əˈkjuː.mjə.leɪt/", pos: "v.", translation: "积累，积聚" },
+  "accuracy": { word: "accuracy", phonetic: "/ˈæk.jə.rə.si/", pos: "n.", translation: "准确性，精确度" },
   "accurate": { word: "accurate", phonetic: "/ˈæk.jə.rət/", pos: "adj.", translation: "精确的，准确的" },
   "accurately": { word: "accurately", phonetic: "/ˈæk.jə.rət.li/", pos: "adv.", translation: "精确地，准确地" },
+  "accuse": { word: "accuse", phonetic: "/əˈkjuːz/", pos: "v.", translation: "指控，控告" },
+  "achieve": { word: "achieve", phonetic: "/əˈtʃiːv/", pos: "v.", translation: "实现，取得" },
+  "achievement": { word: "achievement", phonetic: "/əˈtʃiːv.mənt/", pos: "n.", translation: "成就，成绩" },
+  "acid": { word: "acid", phonetic: "/ˈæs.ɪd/", pos: "n./adj.", translation: "酸；酸性的" },
+  "acknowledge": { word: "acknowledge", phonetic: "/əkˈnɒl.ɪdʒ/", pos: "v.", translation: "承认，确认" },
+  "acquire": { word: "acquire", phonetic: "/əˈkwaɪər/", pos: "v.", translation: "获取，获得" },
+  "acquisition": { word: "acquisition", phonetic: "/ˌæk.wɪˈzɪʃ.ən/", pos: "n.", translation: "获得，收购" },
+  "across": { word: "across", phonetic: "/əˈkrɒs/", pos: "prep./adv.", translation: "穿过，跨越" },
+  "act": { word: "act", phonetic: "/ækt/", pos: "v./n.", translation: "行动，表现；法案" },
+  "action": { word: "action", phonetic: "/ˈæk.ʃən/", pos: "n.", translation: "行动，活动" },
+  "activate": { word: "activate", phonetic: "/ˈæk.tɪ.veɪt/", pos: "v.", translation: "激活，启动" },
+  "active": { word: "active", phonetic: "/ˈæk.tɪv/", pos: "adj.", translation: "积极的，活跃的" },
   "activity": { word: "activity", phonetic: "/ækˈtɪv.ə.ti/", pos: "n.", translation: "活动，行动" },
+  "actor": { word: "actor", phonetic: "/ˈæk.tər/", pos: "n.", translation: "演员" },
+  "actual": { word: "actual", phonetic: "/ˈæk.tʃu.əl/", pos: "adj.", translation: "实际的，真实的" },
+  "actually": { word: "actually", phonetic: "/ˈæk.tʃu.ə.li/", pos: "adv.", translation: "实际上，事实上" },
+  "adapt": { word: "adapt", phonetic: "/əˈdæpt/", pos: "v.", translation: "适应，改编" },
+  "adaptation": { word: "adaptation", phonetic: "/ˌæd.æpˈteɪ.ʃən/", pos: "n.", translation: "适应，改编本" },
+  "add": { word: "add", phonetic: "/æd/", pos: "v.", translation: "增加，添加" },
+  "addition": { word: "addition", phonetic: "/əˈdɪʃ.ən/", pos: "n.", translation: "增加，加法" },
+  "additional": { word: "additional", phonetic: "/əˈdɪʃ.ən.əl/", pos: "adj.", translation: "额外的，附加的" },
+  "address": { word: "address", phonetic: "/əˈdres/", pos: "n./v.", translation: "地址，演讲；处理" },
+  "adequate": { word: "adequate", phonetic: "/ˈæd.ə.kwət/", pos: "adj.", translation: "充分的，适当的" },
+  "adjust": { word: "adjust", phonetic: "/əˈdʒʌst/", pos: "v.", translation: "调整，调节" },
+  "adjustment": { word: "adjustment", phonetic: "/əˈdʒʌst.mənt/", pos: "n.", translation: "调整，适应" },
+  "administer": { word: "administer", phonetic: "/ədˈmɪn.ɪ.stər/", pos: "v.", translation: "管理，执行" },
+  "administration": { word: "administration", phonetic: "/ədˌmɪn.ɪˈstreɪ.ʃən/", pos: "n.", translation: "行政，管理，政府" },
+  "admire": { word: "admire", phonetic: "/ədˈmaɪər/", pos: "v.", translation: "钦佩，赞赏" },
+  "admission": { word: "admission", phonetic: "/ədˈmɪʃ.ən/", pos: "n.", translation: "准许进入，承认" },
+  "admit": { word: "admit", phonetic: "/ədˈmɪt/", pos: "v.", translation: "承认，准许进入" },
   "adopt": { word: "adopt", phonetic: "/əˈdɒpt/", pos: "v.", translation: "采用，采纳，收养" },
+  "adoption": { word: "adoption", phonetic: "/əˈdɒp.ʃən/", pos: "n.", translation: "采用，收养" },
+  "adult": { word: "adult", phonetic: "/ˈæd.ʌlt/", pos: "n./adj.", translation: "成年人；成年的" },
+  "advance": { word: "advance", phonetic: "/ədˈvɑːns/", pos: "n./v.", translation: "前进，提升，预先" },
+  "advanced": { word: "advanced", phonetic: "/ədˈvɑːnst/", pos: "adj.", translation: "先进的，高级的" },
+  "advantage": { word: "advantage", phonetic: "/ədˈvɑːn.tɪdʒ/", pos: "n.", translation: "优势，好处" },
+  "advertisement": { word: "advertisement", phonetic: "/ədˈvɜː.tɪs.mənt/", pos: "n.", translation: "广告" },
+  "advice": { word: "advice", phonetic: "/ədˈvaɪs/", pos: "n.", translation: "建议，忠告" },
+  "advise": { word: "advise", phonetic: "/ədˈvaɪz/", pos: "v.", translation: "建议，通知" },
   "advocate": { word: "advocate", phonetic: "/ˈæd.və.keɪt/", pos: "v./n.", translation: "提倡，主张；倡导者" },
+  "affair": { word: "affair", phonetic: "/əˈfeər/", pos: "n.", translation: "事务，事件" },
+  "affect": { word: "affect", phonetic: "/əˈfekt/", pos: "v.", translation: "影响，感染" },
+  "affection": { word: "affection", phonetic: "/əˈfek.ʃən/", pos: "n.", translation: "喜爱，感情" },
+  "afford": { word: "afford", phonetic: "/əˈfɔːd/", pos: "v.", translation: "负担得起，提供" },
+  "afraid": { word: "afraid", phonetic: "/əˈfreɪd/", pos: "adj.", translation: "害怕的，担心的" },
+  "after": { word: "after", phonetic: "/ˈɑːf.tər/", pos: "prep./conj.", translation: "在...之后" },
+  "afternoon": { word: "afternoon", phonetic: "/ˌɑːf.təˈnuːn/", pos: "n.", translation: "下午" },
+  "again": { word: "again", phonetic: "/əˈɡen/", pos: "adv.", translation: "再次，又" },
+  "against": { word: "against", phonetic: "/əˈɡenst/", pos: "prep.", translation: "反对，倚靠" },
+  "age": { word: "age", phonetic: "/eɪdʒ/", pos: "n./v.", translation: "年龄，时代；变老" },
+  "agency": { word: "agency", phonetic: "/ˈeɪ.dʒən.si/", pos: "n.", translation: "代理机构，中介" },
+  "agenda": { word: "agenda", phonetic: "/əˈdʒen.də/", pos: "n.", translation: "议程，议题" },
+  "agent": { word: "agent", phonetic: "/ˈeɪ.dʒənt/", pos: "n.", translation: "代理人，智能体" },
+  "aggressive": { word: "aggressive", phonetic: "/əˈɡres.ɪv/", pos: "adj.", translation: "好斗的，进取的" },
+  "ago": { word: "ago", phonetic: "/əˈɡəʊ/", pos: "adv.", translation: "以前" },
+  "agree": { word: "agree", phonetic: "/əˈɡriː/", pos: "v.", translation: "同意，赞同" },
+  "agreement": { word: "agreement", phonetic: "/əˈɡriː.mənt/", pos: "n.", translation: "协议，同意" },
+  "agriculture": { word: "agriculture", phonetic: "/ˈæɡ.rɪ.kʌl.tʃər/", pos: "n.", translation: "农业" },
+  "agricultural": { word: "agricultural", phonetic: "/ˌæɡ.rɪˈkʌl.tʃər.əl/", pos: "adj.", translation: "农业的" },
   "ahead": { word: "ahead", phonetic: "/əˈhed/", pos: "adv.", translation: "在前，提前" },
+  "aid": { word: "aid", phonetic: "/eɪd/", pos: "n./v.", translation: "援助，帮助" },
+  "aim": { word: "aim", phonetic: "/eɪm/", pos: "n./v.", translation: "目标；旨在，瞄准" },
+  "air": { word: "air", phonetic: "/eər/", pos: "n.", translation: "空气，天空" },
+  "aircraft": { word: "aircraft", phonetic: "/ˈeə.krɑːft/", pos: "n.", translation: "飞机，飞行器" },
   "airliner": { word: "airliner", phonetic: "/ˈeəˌlaɪ.nər/", pos: "n.", translation: "客机，大型民航飞机" },
+  "airline": { word: "airline", phonetic: "/ˈeə.laɪn/", pos: "n.", translation: "航空公司" },
+  "airport": { word: "airport", phonetic: "/ˈeə.pɔːt/", pos: "n.", translation: "机场" },
+  "alarm": { word: "alarm", phonetic: "/əˈlɑːm/", pos: "n./v.", translation: "警报；使惊恐" },
+  "alcohol": { word: "alcohol", phonetic: "/ˈæl.kə.hɒl/", pos: "n.", translation: "酒精，烈酒" },
+  "alert": { word: "alert", phonetic: "/əˈlɜːt/", pos: "adj./v.", translation: "警惕的；使警觉" },
+  "alien": { word: "alien", phonetic: "/ˈeɪ.li.ən/", pos: "adj./n.", translation: "外来的；外星人" },
+  "alike": { word: "alike", phonetic: "/əˈlaɪk/", pos: "adj./adv.", translation: "相似的；同样地" },
+  "alive": { word: "alive", phonetic: "/əˈlaɪv/", pos: "adj.", translation: "活着的，有生气的" },
+  "all": { word: "all", phonetic: "/ɔːl/", pos: "adj./pron.", translation: "全部的，所有" },
+  "allegation": { word: "allegation", phonetic: "/ˌæl.ɪˈɡeɪ.ʃən/", pos: "n.", translation: "指控，陈述" },
+  "allege": { word: "allege", phonetic: "/əˈledʒ/", pos: "v.", translation: "断言，宣称" },
   "allow": { word: "allow", phonetic: "/əˈlaʊ/", pos: "v.", translation: "允许，使得" },
+  "allowance": { word: "allowance", phonetic: "/əˈlaʊ.əns/", pos: "n.", translation: "津贴，允许" },
+  "ally": { word: "ally", phonetic: "/ˈæl.aɪ/", pos: "n./v.", translation: "盟友；结盟" },
+  "almost": { word: "almost", phonetic: "/ˈɔːl.məʊst/", pos: "adv.", translation: "几乎，差不多" },
+  "alone": { word: "alone", phonetic: "/əˈləʊn/", pos: "adj./adv.", translation: "单独的，独自" },
+  "along": { word: "along", phonetic: "/əˈlɒŋ/", pos: "prep./adv.", translation: "沿着，顺着" },
+  "alongside": { word: "alongside", phonetic: "/əˈlɒŋ.saɪd/", pos: "prep./adv.", translation: "在...旁边" },
+  "already": { word: "already", phonetic: "/ɔːlˈred.i/", pos: "adv.", translation: "已经" },
+  "also": { word: "also", phonetic: "/ˈɔːl.səʊ/", pos: "adv.", translation: "也，而且" },
+  "alter": { word: "alter", phonetic: "/ˈɔːl.tər/", pos: "v.", translation: "改变，修改" },
+  "alternative": { word: "alternative", phonetic: "/ɒlˈtɜː.nə.tɪv/", pos: "n./adj.", translation: "替代选择；供选择的" },
+  "although": { word: "although", phonetic: "/ɔːlˈðəʊ/", pos: "conj.", translation: "虽然，尽管" },
+  "altogether": { word: "altogether", phonetic: "/ˌɔːl.təˈɡeð.ər/", pos: "adv.", translation: "总共，完全" },
+  "always": { word: "always", phonetic: "/ˈɔːl.weɪz/", pos: "adv.", translation: "总是，始终" },
+  "amateur": { word: "amateur", phonetic: "/ˈæm.ə.tər/", pos: "n./adj.", translation: "业余爱好者；业余的" },
+  "amaze": { word: "amaze", phonetic: "/əˈmeɪz/", pos: "v.", translation: "使吃惊" },
+  "ambition": { word: "ambition", phonetic: "/æmˈbɪʃ.ən/", pos: "n.", translation: "野心，抱负" },
+  "ambitious": { word: "ambitious", phonetic: "/æmˈbɪʃ.əs/", pos: "adj.", translation: "有雄心的，野心勃勃的" },
+  "amend": { word: "amend", phonetic: "/əˈmend/", pos: "v.", translation: "修正，修改" },
+  "among": { word: "among", phonetic: "/əˈmʌŋ/", pos: "prep.", translation: "在...之中" },
+  "amount": { word: "amount", phonetic: "/əˈmaʊnt/", pos: "n./v.", translation: "数量；总计" },
+  "ample": { word: "ample", phonetic: "/ˈæm.pəl/", pos: "adj.", translation: "充足的，丰富的" },
+  "amuse": { word: "amuse", phonetic: "/əˈmjuːz/", pos: "v.", translation: "使发笑，娱人" },
+  "analysis": { word: "analysis", phonetic: "/əˈnæl.ə.sɪs/", pos: "n.", translation: "分析，解析" },
+  "analyst": { word: "analyst", phonetic: "/ˈæn.əl.ɪst/", pos: "n.", translation: "分析师" },
+  "analyze": { word: "analyze", phonetic: "/ˈæn.əl.aɪz/", pos: "v.", translation: "分析，剖析" },
+  "ancestor": { word: "ancestor", phonetic: "/ˈæn.ses.tər/", pos: "n.", translation: "祖先，祖宗" },
   "ancient": { word: "ancient", phonetic: "/ˈeɪn.ʃənt/", pos: "adj.", translation: "古代的，古老的" },
+  "angel": { word: "angel", phonetic: "/ˈeɪn.dʒəl/", pos: "n.", translation: "天使" },
+  "anger": { word: "anger", phonetic: "/ˈæŋ.ɡər/", pos: "n./v.", translation: "怒火；使发怒" },
+  "angle": { word: "angle", phonetic: "/ˈæŋ.ɡəl/", pos: "n.", translation: "角度，角" },
+  "angry": { word: "angry", phonetic: "/ˈæŋ.ɡri/", pos: "adj.", translation: "生气的，愤怒的" },
+  "animal": { word: "animal", phonetic: "/ˈæn.ɪ.məl/", pos: "n.", translation: "动物" },
+  "announce": { word: "announce", phonetic: "/əˈnaʊns/", pos: "v.", translation: "宣布，通告" },
+  "announcement": { word: "announcement", phonetic: "/əˈnaʊns.mənt/", pos: "n.", translation: "公告，声明" },
+  "annoy": { word: "annoy", phonetic: "/əˈnɔɪ/", pos: "v.", translation: "打扰，使烦恼" },
+  "annual": { word: "annual", phonetic: "/ˈæn.ju.əl/", pos: "adj.", translation: "每年的，年度的" },
+  "anonymous": { word: "anonymous", phonetic: "/əˈnɒn.ɪ.məs/", pos: "adj.", translation: "匿名的" },
+  "another": { word: "another", phonetic: "/əˈnʌð.ər/", pos: "adj./pron.", translation: "另一个，又一个" },
+  "answer": { word: "answer", phonetic: "/ˈɑːn.sər/", pos: "v./n.", translation: "回答，解答" },
+  "anticipate": { word: "anticipate", phonetic: "/ænˈtɪs.ɪ.peɪt/", pos: "v.", translation: "预料，预期" },
+  "anxiety": { word: "anxiety", phonetic: "/æŋˈzaɪ.ə.ti/", pos: "n.", translation: "焦虑，不安" },
+  "anxious": { word: "anxious", phonetic: "/ˈæŋ.kʃəs/", pos: "adj.", translation: "焦虑的，渴望的" },
+  "any": { word: "any", phonetic: "/ˈen.i/", pos: "adj./pron.", translation: "任何，一些" },
+  "anybody": { word: "anybody", phonetic: "/ˈen.iˌbɒd.i/", pos: "pron.", translation: "任何人" },
+  "anymore": { word: "anymore", phonetic: "/ˌen.iˈmɔːr/", pos: "adv.", translation: "再也（不）" },
+  "anyone": { word: "anyone", phonetic: "/ˈen.i.wʌn/", pos: "pron.", translation: "任何人" },
+  "anything": { word: "anything", phonetic: "/ˈen.i.θɪŋ/", pos: "pron.", translation: "任何事物" },
+  "anyway": { word: "anyway", phonetic: "/ˈen.i.weɪ/", pos: "adv.", translation: "无论如何，不管怎样" },
+  "anywhere": { word: "anywhere", phonetic: "/ˈen.i.weər/", pos: "adv.", translation: "任何地方" },
+  "apart": { word: "apart", phonetic: "/əˈpɑːt/", pos: "adv.", translation: "相隔，分开" },
+  "apartment": { word: "apartment", phonetic: "/əˈpɑːt.mənt/", pos: "n.", translation: "公寓" },
+  "apologize": { word: "apologize", phonetic: "/əˈpɒl.ə.dʒaɪz/", pos: "v.", translation: "道歉" },
+  "apparent": { word: "apparent", phonetic: "/əˈpær.ənt/", pos: "adj.", translation: "显而易见的，表面上的" },
+  "apparently": { word: "apparently", phonetic: "/əˈpær.ənt.li/", pos: "adv.", translation: "显然，看来" },
+  "appeal": { word: "appeal", phonetic: "/əˈpiːl/", pos: "v./n.", translation: "呼吁，上诉；吸引力" },
+  "appear": { word: "appear", phonetic: "/əˈpɪər/", pos: "v.", translation: "出现，显得" },
+  "appearance": { word: "appearance", phonetic: "/əˈpɪə.rəns/", pos: "n.", translation: "外表，出现" },
   "application": { word: "application", phonetic: "/ˌæp.lɪˈkeɪ.ʃən/", pos: "n.", translation: "应用，申请" },
-  "architectural": { word: "architectural", phonetic: "/ˌɑː.kɪˈtek.tʃər.əl/", pos: "adj.", translation: "建筑的，建筑学的" },
+  "apply": { word: "apply", phonetic: "/əˈplaɪ/", pos: "v.", translation: "应用，申请" },
+  "appoint": { word: "appoint", phonetic: "/əˈpɔɪnt/", pos: "v.", translation: "任命，委派" },
+  "appointment": { word: "appointment", phonetic: "/əˈpɔɪnt.mənt/", pos: "n.", translation: "约会，任命" },
+  "appreciate": { word: "appreciate", phonetic: "/əˈpriː.ʃi.eɪt/", pos: "v.", translation: "欣赏，感激" },
+  "approach": { word: "approach", phonetic: "/əˈprəʊtʃ/", pos: "v./n.", translation: "接近；方法" },
+  "appropriate": { word: "appropriate", phonetic: "/əˈprəʊ.pri.ət/", pos: "adj.", translation: "适当的，恰当的" },
+  "approval": { word: "approval", phonetic: "/əˈpruː.vəl/", pos: "n.", translation: "批准，赞成" },
+  "approve": { word: "approve", phonetic: "/əˈpruːv/", pos: "v.", translation: "批准，赞成" },
+  "approximate": { word: "approximate", phonetic: "/əˈprɒk.sɪ.mət/", pos: "adj.", translation: "大约的，近似的" },
+  "architect": { word: "architect", phonetic: "/ˈɑː.kɪ.tekt/", pos: "n.", translation: "建筑师" },
+  "architecture": { word: "architecture", phonetic: "/ˈɑː.kɪ.tek.tʃər/", pos: "n.", translation: "建筑学，建筑" },
+  "architectural": { word: "architectural", phonetic: "/ˌɑː.kɪˈtek.tʃər.əl/", pos: "adj.", translation: "建筑的" },
+  "area": { word: "area", phonetic: "/ˈeə.ri.ə/", pos: "n.", translation: "区域，面积，领域" },
+  "argue": { word: "argue", phonetic: "/ˈɑːɡ.juː/", pos: "v.", translation: "争论，主张" },
+  "argument": { word: "argument", phonetic: "/ˈɑːɡ.ju.mənt/", pos: "n.", translation: "争论，论点" },
+  "arise": { word: "arise", phonetic: "/əˈraɪz/", pos: "v.", translation: "产生，出现" },
+  "arm": { word: "arm", phonetic: "/ɑːm/", pos: "n./v.", translation: "手臂；武装" },
+  "army": { word: "army", phonetic: "/ˈɑː.mi/", pos: "n.", translation: "军队" },
+  "around": { word: "around", phonetic: "/əˈraʊnd/", pos: "prep./adv.", translation: "在四周，大约" },
+  "arrange": { word: "arrange", phonetic: "/əˈreɪndʒ/", pos: "v.", translation: "安排，整理" },
+  "arrangement": { word: "arrangement", phonetic: "/əˈreɪndʒ.mənt/", pos: "n.", translation: "安排，布置" },
+  "arrest": { word: "arrest", phonetic: "/əˈrest/", pos: "v./n.", translation: "逮捕，拘留" },
+  "arrival": { word: "arrival", phonetic: "/əˈraɪ.vəl/", pos: "n.", translation: "到达，到来" },
+  "arrive": { word: "arrive", phonetic: "/əˈraɪv/", pos: "v.", translation: "到达，到来" },
+  "art": { word: "art", phonetic: "/ɑːt/", pos: "n.", translation: "艺术，美术" },
+  "article": { word: "article", phonetic: "/ˈɑː.tɪ.kəl/", pos: "n.", translation: "文章，物品，条款" },
   "artificial": { word: "artificial", phonetic: "/ˌɑː.tɪˈfɪʃ.əl/", pos: "adj.", translation: "人工的，人造的" },
-  "atrial": { word: "atrial", phonetic: "/ˈeɪ.tri.əl/", pos: "adj.", translation: "心房的" },
+  "artist": { word: "artist", phonetic: "/ˈɑː.tɪst/", pos: "n.", translation: "艺术家，画家" },
+  "artistic": { word: "artistic", phonetic: "/ɑːˈtɪs.tɪk/", pos: "adj.", translation: "艺术的" },
+  "ashamed": { word: "ashamed", phonetic: "/əˈʃeɪmd/", pos: "adj.", translation: "羞愧的，惭愧的" },
+  "ask": { word: "ask", phonetic: "/ɑːsk/", pos: "v.", translation: "问，要求" },
+  "asleep": { word: "asleep", phonetic: "/əˈsliːp/", pos: "adj.", translation: "睡着的" },
+  "aspect": { word: "aspect", phonetic: "/ˈæs.pekt/", pos: "n.", translation: "方面，面貌" },
+  "aspire": { word: "aspire", phonetic: "/əˈspaɪər/", pos: "v.", translation: "渴望，追求" },
+  "assemble": { word: "assemble", phonetic: "/əˈsem.bəl/", pos: "v.", translation: "集合，装配" },
+  "assembly": { word: "assembly", phonetic: "/əˈsem.bli/", pos: "n.", translation: "集会，装配" },
+  "assert": { word: "assert", phonetic: "/əˈsɜːt/", pos: "v.", translation: "断言，声称" },
+  "assess": { word: "assess", phonetic: "/əˈses/", pos: "v.", translation: "评估，估算" },
+  "assessment": { word: "assessment", phonetic: "/əˈses.mənt/", pos: "n.", translation: "评估，评价" },
+  "asset": { word: "asset", phonetic: "/ˈæs.et/", pos: "n.", translation: "资产，长处" },
+  "assign": { word: "assign", phonetic: "/əˈsaɪn/", pos: "v.", translation: "分配，指派" },
+  "assignment": { word: "assignment", phonetic: "/əˈsaɪn.mənt/", pos: "n.", translation: "任务，作业" },
+  "assist": { word: "assist", phonetic: "/əˈsɪst/", pos: "v.", translation: "协助，帮助" },
+  "assistance": { word: "assistance", phonetic: "/əˈsɪs.təns/", pos: "n.", translation: "协助，援助" },
+  "assistant": { word: "assistant", phonetic: "/əˈsɪs.tənt/", pos: "n.", translation: "助手，助理" },
+  "associate": { word: "associate", phonetic: "/əˈsəʊ.si.eɪt/", pos: "v./n.", translation: "联想；伙伴" },
+  "association": { word: "association", phonetic: "/əˌsəʊ.siˈeɪ.ʃən/", pos: "n.", translation: "协会，联合" },
+  "assume": { word: "assume", phonetic: "/əˈsjuːm/", pos: "v.", translation: "假定，承担" },
+  "assumption": { word: "assumption", phonetic: "/əˈsʌmp.ʃən/", pos: "n.", translation: "假定，设想" },
+  "assure": { word: "assure", phonetic: "/əˈʃɔːr/", pos: "v.", translation: "向...保证" },
+  "astonish": { word: "astonish", phonetic: "/əˈstɒn.ɪʃ/", pos: "v.", translation: "使惊讶" },
+  "astonishing": { word: "astonishing", phonetic: "/əˈstɒn.ɪ.ʃɪŋ/", pos: "adj.", translation: "惊人的，令人吃惊的" },
+  "atmosphere": { word: "atmosphere", phonetic: "/ˈæt.məs.fɪər/", pos: "n.", translation: "大气层，氛围" },
+  "atom": { word: "atom", phonetic: "/ˈæt.əm/", pos: "n.", translation: "原子" },
+  "attach": { word: "attach", phonetic: "/əˈtætʃ/", pos: "v.", translation: "附加，贴上" },
+  "attack": { word: "attack", phonetic: "/əˈtæk/", pos: "v./n.", translation: "攻击，袭击" },
+  "attain": { word: "attain", phonetic: "/əˈteɪn/", pos: "v.", translation: "达到，获得" },
+  "attempt": { word: "attempt", phonetic: "/əˈtempt/", pos: "n./v.", translation: "企图，尝试" },
+  "attend": { word: "attend", phonetic: "/əˈtend/", pos: "v.", translation: "出席，参加" },
+  "attention": { word: "attention", phonetic: "/əˈten.ʃən/", pos: "n.", translation: "注意力，留心" },
+  "attitude": { word: "attitude", phonetic: "/ˈæt.ɪ.tʃuːd/", pos: "n.", translation: "态度，看法" },
+  "attract": { word: "attract", phonetic: "/əˈtrækt/", pos: "v.", translation: "吸引，引诱" },
+  "attraction": { word: "attraction", phonetic: "/əˈtræk.ʃən/", pos: "n.", translation: "吸引力，景致" },
+  "attractive": { word: "attractive", phonetic: "/əˈtræk.tɪv/", pos: "adj.", translation: "有吸引力的" },
+  "attribute": { word: "attribute", phonetic: "/əˈtrɪb.juːt/", pos: "v./n.", translation: "归因于；属性" },
+  "audience": { word: "audience", phonetic: "/ˈɔː.di.əns/", pos: "n.", translation: "听众，观众" },
+  "august": { word: "august", phonetic: "/ˈɔː.ɡəst/", pos: "n.", translation: "八月" },
+  "author": { word: "author", phonetic: "/ˈɔː.θər/", pos: "n.", translation: "作者，创始人" },
   "authority": { word: "authority", phonetic: "/ɔːˈθɒr.ə.ti/", pos: "n.", translation: "权威，官方机构" },
+  "auto": { word: "auto", phonetic: "/ˈɔː.təʊ/", pos: "n.", translation: "汽车" },
+  "automatic": { word: "automatic", phonetic: "/ˌɔː.təˈmæt.ɪk/", pos: "adj.", translation: "自动的" },
+  "automatically": { word: "automatically", phonetic: "/ˌɔː.təˈmæt.ɪ.kəl.i/", pos: "adv.", translation: "自动地" },
+  "autonomous": { word: "autonomous", phonetic: "/ɔːˈtɒn.ə.məs/", pos: "adj.", translation: "自治的，自主的" },
+  "available": { word: "available", phonetic: "/əˈveɪ.lə.bəl/", pos: "adj.", translation: "可获得的，可用的" },
+  "avenue": { word: "avenue", phonetic: "/ˈæv.ə.njuː/", pos: "n.", translation: "大街，途径" },
+  "average": { word: "average", phonetic: "/ˈæv.ər.ɪdʒ/", pos: "n./adj.", translation: "平均数；平均的" },
   "avoid": { word: "avoid", phonetic: "/əˈvɔɪd/", pos: "v.", translation: "避免，回避" },
-  "awry": { word: "awry", phonetic: "/əˈraɪ/", pos: "adj./adv.", translation: "出错的，乱套的" },
-
-  // B
-  "basic": { word: "basic", phonetic: "/ˈbeɪ.sɪk/", pos: "adj.", translation: "基础的，基本的" },
-  "behaviour": { word: "behaviour", phonetic: "/bɪˈheɪ.vjər/", pos: "n.", translation: "行为，举止" },
-  "behavior": { word: "behavior", phonetic: "/bɪˈheɪ.vjər/", pos: "n.", translation: "行为，举止" },
-  "believer": { word: "believer", phonetic: "/bɪˈliː.vər/", pos: "n.", translation: "信徒，相信...的人" },
-  "blunder": { word: "blunder", phonetic: "/ˈblʌn.dər/", pos: "n./v.", translation: "大错，愚蠢的失误" },
-  "body": { word: "body", phonetic: "/ˈbɒd.i/", pos: "n.", translation: "身体，主体，机构" },
-  "bookkeeping": { word: "bookkeeping", phonetic: "/ˈbʊkˌkiː.pɪŋ/", pos: "n.", translation: "记账，簿记" },
-  "boom": { word: "boom", phonetic: "/buːm/", pos: "n./v.", translation: "繁荣，暴涨" },
-  "breathe": { word: "breathe", phonetic: "/briːð/", pos: "v.", translation: "呼吸，畅通呼吸" },
-  "bubble": { word: "bubble", phonetic: "/ˈbʌb.əl/", pos: "n.", translation: "泡沫，气泡" },
-  "builder": { word: "builder", phonetic: "/ˈbɪl.dər/", pos: "n.", translation: "建筑者，建造者" },
-  "bust": { word: "bust", phonetic: "/bʌst/", pos: "n./v.", translation: "破产，萧条，萧条期" },
-
-  // C
-  "calm": { word: "calm", phonetic: "/kɑːm/", pos: "adj./v.", translation: "平静的；使平静" },
-  "capable": { word: "capable", phonetic: "/ˈkeɪ.pə.bəl/", pos: "adj.", translation: "有能力的，能胜任的" },
-  "capture": { word: "capture", phonetic: "/ˈkæp.tʃər/", pos: "v./n.", translation: "捕捉，捕获" },
-  "carmaker": { word: "carmaker", phonetic: "/ˈkɑːˌmeɪ.kər/", pos: "n.", translation: "汽车制造商" },
-  "castle": { word: "castle", phonetic: "/ˈkɑː.səl/", pos: "n.", translation: "城堡" },
-  "catastrophe": { word: "catastrophe", phonetic: "/kəˈtæs.trə.fi/", pos: "n.", translation: "灾难，大祸" },
-  "cavity": { word: "cavity", phonetic: "/ˈkæv.ə.ti/", pos: "n.", translation: "洞，腔，洞穴" },
-  "cell": { word: "cell", phonetic: "/sel/", pos: "n.", translation: "细胞，蜂房，小室" },
-  "century": { word: "century", phonetic: "/ˈsen.tʃər.i/", pos: "n.", translation: "世纪，百年" },
-  "chain": { word: "chain", phonetic: "/tʃeɪn/", pos: "n.", translation: "链条，供应链，连锁" },
-  "challenge": { word: "challenge", phonetic: "/ˈtʃæl.ɪndʒ/", pos: "n./v.", translation: "挑战，质疑" },
-  "chimpanzee": { word: "chimpanzee", phonetic: "/ˌtʃɪm.pænˈziː/", pos: "n.", translation: "黑猩猩" },
-  "city": { word: "city", phonetic: "/ˈsɪt.i/", pos: "n.", translation: "城市" },
-  "civilisation": { word: "civilisation", phonetic: "/ˌsɪv.əl.aɪˈzeɪ.ʃən/", pos: "n.", translation: "文明" },
-  "civilization": { word: "civilization", phonetic: "/ˌsɪv.əl.aɪˈzeɪ.ʃən/", pos: "n.", translation: "文明" },
-  "climate": { word: "climate", phonetic: "/ˈklaɪ.mət/", pos: "n.", translation: "气候" },
-  "colony": { word: "colony", phonetic: "/ˈkɒl.ə.ni/", pos: "n.", translation: "群体，殖民地" },
-  "comb": { word: "comb", phonetic: "/kəʊm/", pos: "n.", translation: "蜂巢，梳子" },
-  "company": { word: "company", phonetic: "/ˈkʌm.pə.ni/", pos: "n.", translation: "公司，陪伴" },
-  "complex": { word: "complex", phonetic: "/ˈkɒm.pleks/", pos: "adj.", translation: "复杂的，复合的" },
-  "compromise": { word: "compromise", phonetic: "/ˈkɒm.prə.maɪz/", pos: "v./n.", translation: "妥协；损害，危及" },
-  "computer": { word: "computer", phonetic: "/kəmˈpjuː.tər/", pos: "n.", translation: "计算机，电脑" },
-  "concern": { word: "concern", phonetic: "/kənˈsɜːn/", pos: "n./v.", translation: "担忧，关切" },
-  "consequence": { word: "consequence", phonetic: "/ˈkɒn.sɪ.kwəns/", pos: "n.", translation: "后果，结果" },
-  "consensus": { word: "consensus", phonetic: "/kənˈsen.səs/", pos: "n.", translation: "共识，一致意见" },
-  "contraction": { word: "contraction", phonetic: "/kənˈtræk.ʃən/", pos: "n.", translation: "萎缩，收缩" },
-  "corporate": { word: "corporate", phonetic: "/ˈkɔː.pər.ət/", pos: "adj.", translation: "企业的，公司的" },
-  "counterpart": { word: "counterpart", phonetic: "/ˈkaʊn.tə.pɑːt/", pos: "n.", translation: "对应的人或物，物理实体" },
-  "crash": { word: "crash", phonetic: "/kræʃ/", pos: "n./v.", translation: "碰撞测试，暴跌，崩溃" },
-  "crystal": { word: "crystal", phonetic: "/ˈkrɪs.təl/", pos: "n.", translation: "水晶；水晶球" },
-  "cumulatively": { word: "cumulatively", phonetic: "/ˈkjuː.mjə.lə.tɪv.li/", pos: "adv.", translation: "累积地" },
-
-  // D
-  "dam": { word: "dam", phonetic: "/dæm/", pos: "n.", translation: "水坝，堤坝" },
-  "data": { word: "data", phonetic: "/ˈdeɪ.tə/", pos: "n.", translation: "数据，资料" },
-  "debate": { word: "debate", phonetic: "/dɪˈbeɪt/", pos: "n./v.", translation: "辩论，讨论" },
-  "demonstration": { word: "demonstration", phonetic: "/ˌdem.ənˈstreɪ.ʃən/", pos: "n.", translation: "演示，证明" },
-  "demonstrator": { word: "demonstrator", phonetic: "/ˈdem.ən.streɪ.tər/", pos: "n.", translation: "演示者，示范者" },
-  "depilis": { word: "depilis", phonetic: "/deˈpɪl.ɪs/", pos: "n.", translation: "[生物] 无刺蜂物种名" },
-  "design": { word: "design", phonetic: "/dɪˈzaɪn/", pos: "n./v.", translation: "设计，图案" },
-  "diagnosis": { word: "diagnosis", phonetic: "/ˌdaɪ.əɡˈnəʊ.sɪs/", pos: "n.", translation: "诊断，判断" },
-  "digital": { word: "digital", phonetic: "/ˈdɪdʒ.ɪ.təl/", pos: "adj.", translation: "数字的，数码的" },
-  "disaster": { word: "disaster", phonetic: "/dɪˈzɑː.stər/", pos: "n.", translation: "灾难，天灾" },
-  "disorder": { word: "disorder", phonetic: "/dɪsˈɔː.dər/", pos: "n.", translation: "混乱，病症，失调" },
-  "displacement": { word: "displacement", phonetic: "/dɪsˈpleɪs.mənt/", pos: "n.", translation: "替代，移位，失业" },
-  "doctor": { word: "doctor", phonetic: "/ˈdɒk.tər/", pos: "n.", translation: "医生，博士" },
-  "doppelganger": { word: "doppelganger", phonetic: "/ˈdɒp.əlˌɡæŋ.ər/", pos: "n.", translation: "分身，面貌极相似的人" },
-  "door": { word: "door", phonetic: "/dɔːr/", pos: "n.", translation: "门，大门" },
-  "double-entry": { word: "double-entry", phonetic: "/ˌdʌb.əlˈen.tri/", pos: "adj.", translation: "复式记账的" },
-  "downsizing": { word: "downsizing", phonetic: "/ˈdaʊn.saɪ.zɪŋ/", pos: "n.", translation: "精简，裁员" },
-  "drive": { word: "drive", phonetic: "/draɪv/", pos: "v./n.", translation: "驱动，驾驶，试驾" },
-  "dual": { word: "dual", phonetic: "/ˈdʒuː.əl/", pos: "adj.", translation: "双重的，两部分的" },
-
-  // E
-  "earnings": { word: "earnings", phonetic: "/ˈɜː.nɪŋz/", pos: "n.", translation: "收益，利润，收入" },
-  "economist": { word: "economist", phonetic: "/ɪˈkɒn.ə.mɪst/", pos: "n.", translation: "经济学家" },
-  "economy": { word: "economy", phonetic: "/ɪˈkɒn.ə.mi/", pos: "n.", translation: "经济，经济体" },
-  "effect": { word: "effect", phonetic: "/ɪˈfekt/", pos: "n.", translation: "效果，影响" },
-  "efficiency": { word: "efficiency", phonetic: "/ɪˈfɪʃ.ən.si/", pos: "n.", translation: "效率，效能" },
-  "emergence": { word: "emergence", phonetic: "/ɪˈmɜː.dʒəns/", pos: "n.", translation: "兴起，出现" },
-  "emerging": { word: "emerging", phonetic: "/ɪˈmɜː.dʒɪŋ/", pos: "adj.", translation: "新兴的，初露头角的" },
-  "engine": { word: "engine", phonetic: "/ˈen.dʒɪn/", pos: "n.", translation: "发动机，引擎" },
-  "engineering": { word: "engineering", phonetic: "/ˌen.dʒɪˈnɪə.rɪŋ/", pos: "n.", translation: "工程学，工程技术" },
-  "entertainment": { word: "entertainment", phonetic: "/en.təˈteɪn.mənt/", pos: "n.", translation: "娱乐，娱乐产业" },
-  "environment": { word: "environment", phonetic: "/ɪnˈvaɪ.rən.mənt/", pos: "n.", translation: "环境" },
-  "environmental": { word: "environmental", phonetic: "/ɪnˌvaɪ.rənˈmen.təl/", pos: "adj.", translation: "环境的，环保的" },
-  "erratic": { word: "erratic", phonetic: "/ɪˈræt.ɪk/", pos: "adj.", translation: "反复无常的，不稳定的" },
-  "evaluate": { word: "evaluate", phonetic: "/ɪˈvæl.ju.eɪt/", pos: "v.", translation: "评估，评价" },
-  "evaluation": { word: "evaluation", phonetic: "/ɪˌvæl.juˈeɪ.ʃən/", pos: "n.", translation: "评估，评价" },
-  "everyday": { word: "everyday", phonetic: "/ˈev.ri.deɪ/", pos: "adj.", translation: "日常的，每天的" },
-  "everyone": { word: "everyone", phonetic: "/ˈev.ri.wʌn/", pos: "pron.", translation: "每个人" },
-  "everywhere": { word: "everywhere", phonetic: "/ˈev.ri.weər/", pos: "adv.", translation: "到处，各处" },
-  "evolutionary": { word: "evolutionary", phonetic: "/ˌiː.vəˈluː.ʃən.ər.i/", pos: "adj.", translation: "进化的，演化的" },
-  "expect": { word: "expect", phonetic: "/ɪkˈspekt/", pos: "v.", translation: "预期，期望，预计" },
-  "expectation": { word: "expectation", phonetic: "/ˌek.spekˈteɪ.ʃən/", pos: "n.", translation: "预期，期望" },
-  "experiment": { word: "experiment", phonetic: "/ɪkˈsper.ɪ.mənt/", pos: "n./v.", translation: "实验，尝试" },
-  "explanation": { word: "explanation", phonetic: "/ˌek.spləˈneɪ.ʃən/", pos: "n.", translation: "解释，说明" },
-  "extensive": { word: "extensive", phonetic: "/ɪkˈsten.sɪv/", pos: "adj.", translation: "广泛的，大规模的" },
-  "extend": { word: "extend", phonetic: "/ɪkˈstend/", pos: "v.", translation: "延伸，拓展" },
-
-  // F
-  "factory": { word: "factory", phonetic: "/ˈfæk.tər.i/", pos: "n.", translation: "工厂" },
-  "fantasy": { word: "fantasy", phonetic: "/ˈfæn.tə.si/", pos: "n.", translation: "幻想，虚幻" },
-  "farm": { word: "farm", phonetic: "/fɑːm/", pos: "n.", translation: "农场，农业" },
-  "fashion": { word: "fashion", phonetic: "/ˈfæʃ.ən/", pos: "v./n.", translation: "制作，塑造；时尚" },
-  "fast": { word: "fast", phonetic: "/fɑːst/", pos: "adv./adj.", translation: "快速地；快速的" },
-  "federal": { word: "federal", phonetic: "/ˈfed.ər.əl/", pos: "adj.", translation: "联邦的" },
-  "feed": { word: "feed", phonetic: "/fiːd/", pos: "v.", translation: "喂养，输入数据" },
-  "fibrillation": { word: "fibrillation", phonetic: "/ˌfɪb.rɪˈleɪ.ʃən/", pos: "n.", translation: "颤动（如心房颤动）" },
-  "finance": { word: "finance", phonetic: "/ˈfaɪ.næns/", pos: "n.", translation: "财务，金融" },
-  "fine-tune": { word: "fine-tune", phonetic: "/ˌfaɪnˈtʃuːn/", pos: "v.", translation: "微调，精心调整" },
-  "fire": { word: "fire", phonetic: "/faɪər/", pos: "v./n.", translation: "解雇；点火；火（fire on all cylinders马力全开）" },
-  "flood": { word: "flood", phonetic: "/flʌd/", pos: "n./v.", translation: "洪水，淹没" },
-  "flooding": { word: "flooding", phonetic: "/ˈflʌd.ɪŋ/", pos: "n.", translation: "洪涝灾害，泛滥" },
-  "flow": { word: "flow", phonetic: "/fləʊ/", pos: "n./v.", translation: "流动，运转" },
-  "forecast": { word: "forecast", phonetic: "/ˈfɔː.kɑːst/", pos: "v./n.", translation: "预测，预报" },
-  "form": { word: "form", phonetic: "/fɔːm/", pos: "v./n.", translation: "形成，构成；形式" },
-  "foundation": { word: "foundation", phonetic: "/faʊnˈdeɪ.ʃən/", pos: "n.", translation: "基础，根基" },
-  "future": { word: "future", phonetic: "/ˈfjuː.tʃər/", pos: "n./adj.", translation: "未来，前景" },
-
-  // G
-  "generative": { word: "generative", phonetic: "/ˈdʒen.ər.ə.tɪv/", pos: "adj.", translation: "生成式的，生成的" },
-  "generational": { word: "generational", phonetic: "/ˌdʒen.əˈreɪ.ʃən.əl/", pos: "adj.", translation: "世代的" },
-  "genetic": { word: "genetic", phonetic: "/dʒəˈnet.ɪk/", pos: "adj.", translation: "基因的，遗传的" },
-  "geographic": { word: "geographic", phonetic: "/ˌdʒiː.əˈɡræf.ɪk/", pos: "adj.", translation: "地理的" },
-  "geometric": { word: "geometric", phonetic: "/ˌdʒiː.əˈmet.rɪk/", pos: "adj.", translation: "几何的" },
-  "giant": { word: "giant", phonetic: "/ˈdʒaɪ.ənt/", pos: "n./adj.", translation: "巨头，骨干；巨大的" },
-  "glum": { word: "glum", phonetic: "/ɡlʌm/", pos: "adj.", translation: "阴郁的，低迷的" },
-  "gobble": { word: "gobble", phonetic: "/ˈɡɒb.əl/", pos: "v.", translation: "吞噬，狼吞虎咽" },
-  "government": { word: "government", phonetic: "/ˈɡʌv.ən.mənt/", pos: "n.", translation: "政府" },
-  "grand": { word: "grand", phonetic: "/ɡrænd/", pos: "adj.", translation: "盛大的（Grand Prix 大奖赛）" },
-
-  // H
-  "hack": { word: "hack", phonetic: "/hæk/", pos: "v.", translation: "黑客入侵，砍" },
-  "health": { word: "health", phonetic: "/helθ/", pos: "n.", translation: "健康，运行状态" },
-  "healthcare": { word: "healthcare", phonetic: "/ˈhelθ.keər/", pos: "n.", translation: "医疗保健" },
-  "heart": { word: "heart", phonetic: "/hɑːt/", pos: "n.", translation: "心脏，核心" },
-  "helicity": { word: "helicity", phonetic: "/hɪˈlɪs.ə.ti/", pos: "n.", translation: "螺旋度，螺旋结构" },
-  "high": { word: "high", phonetic: "/haɪ/", pos: "adj.", translation: "高的" },
-  "horizontal": { word: "horizontal", phonetic: "/ˌhɒr.ɪˈzɒn.təl/", pos: "adj.", translation: "水平的" },
-  "host": { word: "host", phonetic: "/həʊst/", pos: "n.", translation: "宿主，东道主" },
-  "human": { word: "human", phonetic: "/ˈhjuː.mən/", pos: "n./adj.", translation: "人类；人的" },
-  "hunker": { word: "hunker", phonetic: "/ˈhʌŋ.kər/", pos: "v.", translation: "蹲下，hunker down 观望收缩" },
-  "hydraulic": { word: "hydraulic", phonetic: "/haɪˈdrɔː.lɪk/", pos: "adj.", translation: "水力的，液压的" },
-  "hypothesise": { word: "hypothesise", phonetic: "/haɪˈpɒθ.ə.saɪz/", pos: "v.", translation: "假设，假定" },
-
-  // I
-  "idea": { word: "idea", phonetic: "/aɪˈdɪə/", pos: "n.", translation: "想法，概念" },
-  "ignore": { word: "ignore", phonetic: "/ɪɡˈnɔːr/", pos: "v.", translation: "忽视，忽略" },
-  "immigration": { word: "immigration", phonetic: "/ˌɪm.ɪˈɡreɪ.ʃən/", pos: "n.", translation: "移民，入境" },
-  "impossible": { word: "impossible", phonetic: "/ɪmˈpɒs.ə.bəl/", pos: "adj.", translation: "不可能的" },
-  "indigenous": { word: "indigenous", phonetic: "/ɪnˈdɪdʒ.ɪ.nəs/", pos: "adj.", translation: "本土的，原产的" },
-  "indirect": { word: "indirect", phonetic: "/ˌɪn.daɪˈrekt/", pos: "adj.", translation: "间接的" },
-  "individual": { word: "individual", phonetic: "/ˌɪn.dɪˈvɪdʒ.u.əl/", pos: "n./adj.", translation: "个体；个别的" },
-  "industry": { word: "industry", phonetic: "/ˈɪn.də.stri/", pos: "n.", translation: "工业，产业" },
-  "inflation": { word: "inflation", phonetic: "/ɪnˈfleɪ.ʃən/", pos: "n.", translation: "通货膨胀" },
-  "initially": { word: "initially", phonetic: "/ɪˈnɪʃ.əl.i/", pos: "adv.", translation: "最初，起初" },
-  "innovation": { word: "innovation", phonetic: "/ˌɪn.əˈveɪ.ʃən/", pos: "n.", translation: "创新，改革" },
-  "insect": { word: "insect", phonetic: "/ˈɪn.sekt/", pos: "n.", translation: "昆虫" },
-  "insecurity": { word: "insecurity", phonetic: "/ˌɪn.sɪˈkjʊə.rə.ti/", pos: "n.", translation: "不安全感，局促" },
-  "institution": { word: "institution", phonetic: "/ˌɪn.stɪˈtʃuː.ʃən/", pos: "n.", translation: "机构，制度" },
-  "instruct": { word: "instruct", phonetic: "/ɪnˈstrʌkt/", pos: "v.", translation: "指导，指示" },
-  "integration": { word: "integration", phonetic: "/ˌɪn.tɪˈɡreɪ.ʃən/", pos: "n.", translation: "融合，一体化" },
-  "integrity": { word: "integrity", phonetic: "/ɪnˈteɡ.rə.ti/", pos: "n.", translation: "诚信，完整" },
-  "intelligence": { word: "intelligence", phonetic: "/ɪnˈtel.ɪ.dʒəns/", pos: "n.", translation: "智力，情报，人工智能" },
-  "intricate": { word: "intricate", phonetic: "/ˈɪn.trɪ.kət/", pos: "adj.", translation: "错综复杂的" },
-  "intricacy": { word: "intricacy", phonetic: "/ˈɪn.trɪ.kə.si/", pos: "n.", translation: "错综复杂之处" },
-  "inventory": { word: "inventory", phonetic: "/ˈɪn.vən.tər.i/", pos: "n.", translation: "库存，清单" },
-  "investment": { word: "investment", phonetic: "/ɪnˈvest.mənt/", pos: "n.", translation: "投资" },
-  "inversion": { word: "inversion", phonetic: "/ɪnˈvɜː.ʃən/", pos: "n.", translation: "倒装，颠倒" },
-
-  // J - L
-  "job": { word: "job", phonetic: "/dʒɒb/", pos: "n.", translation: "工作，岗位" },
-  "larva": { word: "larva", phonetic: "/ˈlɑː.və/", pos: "n.", translation: "幼虫" },
-  "larvae": { word: "larvae", phonetic: "/ˈlɑː.viː/", pos: "n.", translation: "幼虫（复数）" },
-  "latest": { word: "latest", phonetic: "/ˈleɪ.tɪst/", pos: "adj.", translation: "最新的，最近的" },
-  "layer": { word: "layer", phonetic: "/ˈleɪ.ər/", pos: "n.", translation: "层，分层" },
-  "layoff": { word: "layoff", phonetic: "/ˈleɪ.ɒf/", pos: "n.", translation: "裁员，解雇" },
-  "like": { word: "like", phonetic: "/laɪk/", pos: "v./prep.", translation: "像，如同；喜欢" },
-  "likely": { word: "likely", phonetic: "/ˈlaɪk.li/", pos: "adj./adv.", translation: "很可能的，大概" },
-  "link": { word: "link", phonetic: "/lɪŋk/", pos: "v./n.", translation: "连接，关联" },
-  "litany": { word: "litany", phonetic: "/ˈlɪt.ən.i/", pos: "n.", translation: "一连串（不愉快的事）" },
-  "locale": { word: "locale", phonetic: "/ləʊˈkɑːl/", pos: "n.", translation: "场所，地点" },
-  "log": { word: "log", phonetic: "/lɒɡ/", pos: "v./n.", translation: "记录，日志" },
-
-  // M
-  "manage": { word: "manage", phonetic: "/ˈmæn.ɪdʒ/", pos: "v.", translation: "管理，经营" },
-  "management": { word: "management", phonetic: "/ˈmæn.ɪdʒ.mənt/", pos: "n.", translation: "管理，管理部门" },
-  "market": { word: "market", phonetic: "/ˈmɑː.kɪt/", pos: "n.", translation: "市场" },
-  "materialise": { word: "materialise", phonetic: "/məˈtɪə.ri.ə.laɪz/", pos: "v.", translation: "实现，变为现实" },
-  "materialize": { word: "materialize", phonetic: "/məˈtɪə.ri.ə.laɪz/", pos: "v.", translation: "实现，变为现实" },
-  "measure": { word: "measure", phonetic: "/ˈmeʒ.ər/", pos: "v./n.", translation: "测量，衡量" },
-  "mechanic": { word: "mechanic", phonetic: "/mɪˈkæn.ɪk/", pos: "n.", translation: "机制，技工" },
-  "mechanism": { word: "mechanism", phonetic: "/ˈmek.ə.nɪz.əm/", pos: "n.", translation: "机制，机理" },
-  "medical": { word: "medical", phonetic: "/ˈmed.ɪ.kəl/", pos: "adj.", translation: "医疗的，医学的" },
-  "medicine": { word: "medicine", phonetic: "/ˈmed.sən/", pos: "n.", translation: "药物，医学" },
-  "memorisation": { word: "memorisation", phonetic: "/ˌmem.ər.aɪˈzeɪ.ʃən/", pos: "n.", translation: "死记硬背，记忆" },
-  "merchant": { word: "merchant", phonetic: "/ˈmɜː.tʃənt/", pos: "n.", translation: "商人" },
-  "minuscule": { word: "minuscule", phonetic: "/ˈmɪn.ə.skjuːl/", pos: "adj.", translation: "极小的，微小的" },
-  "mirror": { word: "mirror", phonetic: "/ˈmɪr.ər/", pos: "v./n.", translation: "镜像映射；镜子" },
-  "model": { word: "model", phonetic: "/ˈmɒd.əl/", pos: "n./v.", translation: "模型，模式；建模" },
-  "modelling": { word: "modelling", phonetic: "/ˈmɒd.əl.ɪŋ/", pos: "n.", translation: "建模，模拟" },
-  "modifier": { word: "modifier", phonetic: "/ˈmɒd.ɪ.faɪ.ər/", pos: "n.", translation: "修饰语" },
-  "monitor": { word: "monitor", phonetic: "/ˈmɒn.ɪ.tər/", pos: "v./n.", translation: "监控，监视" },
-  "mountain": { word: "mountain", phonetic: "/ˈmaʊn.tɪn/", pos: "n.", translation: "山，海量(mountains of)" },
-
-  // N - O
-  "national": { word: "national", phonetic: "/ˈnæʃ.ən.əl/", pos: "adj.", translation: "国家的，国民的" },
-  "native": { word: "native", phonetic: "/ˈneɪ.tɪv/", pos: "adj.", translation: "土生土长的，原产的" },
-  "network": { word: "network", phonetic: "/ˈnet.wɜːk/", pos: "n.", translation: "网络，网状系统" },
-  "nonfarm": { word: "nonfarm", phonetic: "/nɒnˈfɑːm/", pos: "adj.", translation: "非农的（如非农就业数据）" },
-  "notion": { word: "notion", phonetic: "/ˈnəʊ.ʃən/", pos: "n.", translation: "概念，观念" },
-  "observe": { word: "observe", phonetic: "/əbˈzɜːv/", pos: "v.", translation: "观察，遵守" },
-  "omission": { word: "omission", phonetic: "/əʊˈmɪʃ.ən/", pos: "n.", translation: "省略，遗漏" },
-  "online": { word: "online", phonetic: "/ˈɒn.laɪn/", pos: "adj./adv.", translation: "在线的，网络上的" },
-  "operate": { word: "operate", phonetic: "/ˈɒp.ər.eɪt/", pos: "v.", translation: "操作，运转" },
-  "operation": { word: "operation", phonetic: "/ˌɒp.ərˈeɪ.ʃən/", pos: "n.", translation: "运营，操作" },
-  "optimise": { word: "optimise", phonetic: "/ˈɒp.tɪ.maɪz/", pos: "v.", translation: "优化，使完善" },
-  "optimize": { word: "optimize", phonetic: "/ˈɒp.tɪ.maɪz/", pos: "v.", translation: "优化，使完善" },
-  "organ": { word: "organ", phonetic: "/ˈɔː.ɡən/", pos: "n.", translation: "器官，机构" },
-  "organism": { word: "organism", phonetic: "/ˈɔː.ɡən.ɪz.əm/", pos: "n.", translation: "生物，有机体" },
-  "outplacement": { word: "outplacement", phonetic: "/ˈaʊtˌpleɪs.mənt/", pos: "n.", translation: "再就业援助，职业转换服务" },
-
-  // P
-  "paper-based": { word: "paper-based", phonetic: "/ˈpeɪ.pər.beɪst/", pos: "adj.", translation: "纸质的，基于纸张的" },
-  "paradigm": { word: "paradigm", phonetic: "/ˈpær.ə.daɪm/", pos: "n.", translation: "范式，典范" },
-  "parallel": { word: "parallel", phonetic: "/ˈpær.ə.lel/", pos: "adj.", translation: "平行的，无比的" },
-  "participate": { word: "participate", phonetic: "/pɑːˈtɪs.ɪ.peɪt/", pos: "v.", translation: "参与，参加" },
-  "passive": { word: "passive", phonetic: "/ˈpæs.ɪv/", pos: "adj.", translation: "被动的" },
-  "patient": { word: "patient", phonetic: "/ˈpeɪ.ʃənt/", pos: "n./adj.", translation: "患者，病人；有耐心的" },
-  "peer": { word: "peer", phonetic: "/pɪər/", pos: "v./n.", translation: "窥视，凝视；同伴" },
-  "perpetuated": { word: "perpetuate", phonetic: "/pəˈpet.ʃu.eɪt/", pos: "v.", translation: "使延续，使永存" },
-  "person": { word: "person", phonetic: "/ˈpɜː.sən/", pos: "n.", translation: "人" },
-  "personal": { word: "personal", phonetic: "/ˈpɜː.sən.əl/", pos: "adj.", translation: "个人的，私人的" },
-  "personalised": { word: "personalised", phonetic: "/ˈpɜː.sən.əl.aɪzd/", pos: "adj.", translation: "个性化的，定制的" },
-  "personalized": { word: "personalized", phonetic: "/ˈpɜː.sən.əl.aɪzd/", pos: "adj.", translation: "个性化的，定制的" },
-  "perspective": { word: "perspective", phonetic: "/pəˈspek.tɪv/", pos: "n.", translation: "视角，深入透视" },
-  "phonetic": { word: "phonetic", phonetic: "/fəˈnet.ɪk/", pos: "adj.", translation: "语音的，音标的" },
-  "physical": { word: "physical", phonetic: "/ˈfɪz.ɪ.kəl/", pos: "adj.", translation: "物理的，实体的，身体的" },
-  "physician": { word: "physician", phonetic: "/fɪˈzɪʃ.ən/", pos: "n.", translation: "医师，内科医生" },
-  "pioneering": { word: "pioneering", phonetic: "/ˌpaɪəˈnɪə.rɪŋ/", pos: "adj.", translation: "开创性的，先驱的" },
-  "planet": { word: "planet", phonetic: "/ˈplæn.ɪt/", pos: "n.", translation: "行星，地球" },
-  "pop": { word: "pop", phonetic: "/pɒp/", pos: "v.", translation: "pop up 弹出，纷至沓来" },
-  "powerful": { word: "powerful", phonetic: "/ˈpaʊə.fəl/", pos: "adj.", translation: "强大的，强有力的" },
-  "predecessor": { word: "predecessor", phonetic: "/ˈpriː.dɪˌses.ər/", pos: "n.", translation: "前任，前辈" },
-  "prediction": { word: "prediction", phonetic: "/prɪˈdɪk.ʃən/", pos: "n.", translation: "预测，预言" },
-  "preference": { word: "preference", phonetic: "/ˈpref.ər.əns/", pos: "n.", translation: "偏好，优先选择" },
-  "prejudiced": { word: "prejudiced", phonetic: "/ˈpredʒ.ə.dɪst/", pos: "adj.", translation: "有偏见的，有成见的" },
-  "privacy": { word: "privacy", phonetic: "/ˈprɪv.ə.si/", pos: "n.", translation: "隐私，私密" },
-  "procedure": { word: "procedure", phonetic: "/prəˈsiː.dʒər/", pos: "n.", translation: "程序，诊疗步骤" },
-  "process": { word: "process", phonetic: "/ˈprəʊ.ses/", pos: "n./v.", translation: "过程；处理" },
-  "progress": { word: "progress", phonetic: "/ˈprəʊ.ɡres/", pos: "n./v.", translation: "进步，进展" },
-  "prompt": { word: "prompt", phonetic: "/prɒmpt/", pos: "v./adj.", translation: "促使，引起；迅速的" },
-  "pyramid": { word: "pyramid", phonetic: "/ˈpɪr.ə.mɪd/", pos: "n.", translation: "金字塔" },
-
-  // Q - R
-  "real": { word: "real", phonetic: "/rɪəl/", pos: "adj.", translation: "真实的，现实的" },
-  "real-time": { word: "real-time", phonetic: "/ˌrɪəlˈtaɪm/", pos: "adj.", translation: "实时的" },
-  "recession": { word: "recession", phonetic: "/rɪˈseʃ.ən/", pos: "n.", translation: "衰退，萧条" },
-  "recovery": { word: "recovery", phonetic: "/rɪˈkʌv.ər.i/", pos: "n.", translation: "康复，恢复" },
-  "reflect": { word: "reflect", phonetic: "/rɪˈflekt/", pos: "v.", translation: "反映，反射" },
-  "remainder": { word: "remainder", phonetic: "/rɪˈmeɪn.dər/", pos: "n.", translation: "剩余部分" },
-  "reminiscent": { word: "reminiscent", phonetic: "/ˌrem.ɪˈnɪs.ənt/", pos: "adj.", translation: "令人想起...的" },
-  "replicate": { word: "replicate", phonetic: "/ˈrep.lɪ.keɪt/", pos: "v.", translation: "复制，精准拟真" },
-  "representation": { word: "representation", phonetic: "/ˌrep.rɪ.zenˈteɪ.ʃən/", pos: "n.", translation: "表征，呈现" },
-  "researcher": { word: "researcher", phonetic: "/rɪˈsɜː.tʃər/", pos: "n.", translation: "研究人员" },
-  "resemble": { word: "resemble", phonetic: "/rɪˈzem.bəl/", pos: "v.", translation: "类似于，像" },
-  "respond": { word: "respond", phonetic: "/rɪˈspɒnd/", pos: "v.", translation: "回应，应对" },
-  "response": { word: "response", phonetic: "/rɪˈspɒns/", pos: "n.", translation: "回答，反应" },
-  "retailer": { word: "retailer", phonetic: "/ˈriː.teɪ.lər/", pos: "n.", translation: "零售商" },
-  "rethink": { word: "rethink", phonetic: "/ˌriːˈθɪŋk/", pos: "v.", translation: "重新思考，反思" },
-  "reverse": { word: "reverse", phonetic: "/rɪˈvɜːs/", pos: "v./n.", translation: "颠倒，逆转" },
-  "risk": { word: "risk", phonetic: "/rɪsk/", pos: "n./v.", translation: "风险，冒...风险" },
-  "risky": { word: "risky", phonetic: "/ˈrɪs.ki/", pos: "adj.", translation: "高风险的，危险的" },
-  "rogue": { word: "rogue", phonetic: "/rəʊɡ/", pos: "adj./n.", translation: "失控的，违规作恶(go rogue)" },
-  "runaway": { word: "runaway", phonetic: "/ˈrʌn.ə.weɪ/", pos: "adj./n.", translation: "逃跑的，失控外流的" },
-
-  // S
-  "sales": { word: "sales", phonetic: "/seɪlz/", pos: "n.", translation: "销售额，销量" },
-  "sandbox": { word: "sandbox", phonetic: "/ˈsænd.bɒks/", pos: "n.", translation: "沙盒，试验场" },
-  "scenario": { word: "scenario", phonetic: "/səˈnɑː.ri.əʊ/", pos: "n.", translation: "情景预案，设想" },
-  "schism": { word: "schism", phonetic: "/ˈsɪz.əm/", pos: "n.", translation: "分裂，分化" },
-  "screen": { word: "screen", phonetic: "/skriːn/", pos: "n.", translation: "屏幕，屏障" },
-  "sensor": { word: "sensor", phonetic: "/ˈsen.sər/", pos: "n.", translation: "传感器" },
-  "sentiment": { word: "sentiment", phonetic: "/ˈsen.tɪ.mənt/", pos: "n.", translation: "情绪，情感" },
-  "shave": { word: "shave", phonetic: "/ʃeɪv/", pos: "v.", translation: "剃，shave off 削减缩短" },
-  "sign": { word: "sign", phonetic: "/saɪn/", pos: "n.", translation: "体征，迹象" },
-  "simulation": { word: "simulation", phonetic: "/ˌsɪm.jəˈleɪ.ʃən/", pos: "n.", translation: "模拟，仿真" },
-  "sophisticated": { word: "sophisticated", phonetic: "/səˈfɪs.tɪ.keɪ.tɪd/", pos: "adj.", translation: "精密复杂的，高级的" },
-  "specifically": { word: "specifically", phonetic: "/spəˈsɪf.ɪ.kəl.i/", pos: "adv.", translation: "专门地，具体地" },
-  "speech": { word: "speech", phonetic: "/spiːtʃ/", pos: "n.", translation: "语音，演讲" },
-  "spiral": { word: "spiral", phonetic: "/ˈspaɪə.rəl/", pos: "adj./n.", translation: "螺旋形的；螺旋" },
-  "spontaneously": { word: "spontaneously", phonetic: "/spɒnˈteɪ.ni.əs.li/", pos: "adv.", translation: "自发地" },
-  "spreadsheet": { word: "spreadsheet", phonetic: "/ˈspred.ʃiːt/", pos: "n.", translation: "电子表格" },
-  "statistical": { word: "statistical", phonetic: "/stəˈtɪs.tɪ.kəl/", pos: "adj.", translation: "统计的" },
-  "stigmergy": { word: "stigmergy", phonetic: "/ˈstɪɡ.mɜː.dʒi/", pos: "n.", translation: "共识主动性，痕迹导引" },
-  "streamline": { word: "streamline", phonetic: "/ˈstriːm.laɪn/", pos: "v.", translation: "精简，使合理化" },
-  "streamlined": { word: "streamlined", phonetic: "/ˈstriːm.laɪnd/", pos: "adj.", translation: "精简高效的" },
-  "structure": { word: "structure", phonetic: "/ˈstrʌk.tʃər/", pos: "n.", translation: "结构，建筑物" },
-  "suburb": { word: "suburb", phonetic: "/ˈsʌb.ɜːb/", pos: "n.", translation: "郊区" },
-  "succession": { word: "succession", phonetic: "/səkˈseʃ.ən/", pos: "n.", translation: "一连串，接替" },
-  "sucrose": { word: "sucrose", phonetic: "/ˈsuː.krəʊz/", pos: "n.", translation: "蔗糖" },
-  "summon": { word: "summon", phonetic: "/ˈsʌm.ən/", pos: "v.", translation: "召唤，调取" },
-  "supply": { word: "supply", phonetic: "/səˈplaɪ/", pos: "n./v.", translation: "供应，供给" },
-  "surveillance": { word: "surveillance", phonetic: "/səˈveɪ.ləns/", pos: "n.", translation: "监控，监视" },
-  "symbolic": { word: "symbolic", phonetic: "/sɪmˈbɒl.ɪk/", pos: "adj.", translation: "象征性的" },
-  "syntactic": { word: "syntactic", phonetic: "/sɪnˈtæk.tɪk/", pos: "adj.", translation: "句法的" },
-  "system": { word: "system", phonetic: "/ˈsɪs.təm/", pos: "n.", translation: "系统，体系" },
-
-  // T - Z
-  "tackle": { word: "tackle", phonetic: "/ˈtæk.əl/", pos: "v.", translation: "处理，应对（难题）" },
-  "tantalising": { word: "tantalising", phonetic: "/ˈtæn.təl.aɪ.zɪŋ/", pos: "adj.", translation: "令人心动的，诱人的" },
-  "technique": { word: "technique", phonetic: "/tekˈniːk/", pos: "n.", translation: "技术，技巧" },
-  "technology": { word: "technology", phonetic: "/tekˈnɒl.ə.dʒi/", pos: "n.", translation: "技术，科技" },
-  "threaten": { word: "threaten", phonetic: "/ˈθret.ən/", pos: "v.", translation: "威胁，恐吓" },
-  "tier": { word: "tier", phonetic: "/tɪər/", pos: "n.", translation: "层，阶层" },
-  "tomb": { word: "tomb", phonetic: "/tuːm/", pos: "n.", translation: "坟墓，陵墓" },
-  "track": { word: "track", phonetic: "/træk/", pos: "v./n.", translation: "追踪，记录；轨道" },
-  "tradition": { word: "tradition", phonetic: "/trəˈdɪʃ.ən/", pos: "n.", translation: "传统" },
-  "transaction": { word: "transaction", phonetic: "/trænˈzæk.ʃən/", pos: "n.", translation: "交易" },
-  "transplant": { word: "transplant", phonetic: "/trænˈsplɑːnt/", pos: "v.", translation: "移植，迁移" },
-  "treatment": { word: "treatment", phonetic: "/ˈtriːt.mənt/", pos: "n.", translation: "治疗，处理" },
-  "tunnel": { word: "tunnel", phonetic: "/ˈtʌn.əl/", pos: "n.", translation: "隧道；tunnel vision 管道视野" },
-  "turbocharge": { word: "turbocharge", phonetic: "/ˈtɜː.bəʊ.tʃɑːdʒ/", pos: "v.", translation: "加速推动，提速" },
-  "turnaround": { word: "turnaround", phonetic: "/ˈtɜːn.a.raʊnd/", pos: "n.", translation: "好转，逆转" },
-  "twin": { word: "twin", phonetic: "/twɪn/", pos: "n./v.", translation: "孪生，双胞胎；数字孪生" },
-  "underestimate": { word: "underestimate", phonetic: "/ˌʌn.dəˈres.tɪ.meɪt/", pos: "v.", translation: "低估" },
-  "unemployment": { word: "unemployment", phonetic: "/ˌʌn.ɪmˈplɔɪ.mənt/", pos: "n.", translation: "失业，失业率" },
-  "unparalleled": { word: "unparalleled", phonetic: "/ʌnˈpær.ə.leld/", pos: "adj.", translation: "无与伦比的，空前的" },
-  "update": { word: "update", phonetic: "/ʌpˈdeɪt/", pos: "v./n.", translation: "更新，最新消息" },
-  "vehicle": { word: "vehicle", phonetic: "/ˈvɪə.kəl/", pos: "n.", translation: "车辆，载体" },
-  "version": { word: "version", phonetic: "/ˈvɜː.ʃən/", pos: "n.", translation: "版本" },
-  "virtual": { word: "virtual", phonetic: "/ˈvɜː.tʃu.əl/", pos: "adj.", translation: "虚拟的，实质上的" },
-  "visiting": { word: "visiting", phonetic: "/ˈvɪz.ɪ.tɪŋ/", pos: "v./adj.", translation: "拜访，看诊" },
-  "vital": { word: "vital", phonetic: "/ˈvaɪ.təl/", pos: "adj.", translation: "生命的，至关重要的" },
-  "volatile": { word: "volatile", phonetic: "/ˈvɒl.ə.taɪl/", pos: "adj.", translation: "动荡不安的，易变的" },
-  "whipsaw": { word: "whipsaw", phonetic: "/ˈwɪp.sɔː/", pos: "v.", translation: "使两头受挫，剧烈折磨" },
-  "workforce": { word: "workforce", phonetic: "/ˈwɜːk.fɔːs/", pos: "n.", translation: "劳动力，职工总数" },
-  "world": { word: "world", phonetic: "/wɜːld/", pos: "n.", translation: "世界，领域" },
-  "year": { word: "year", phonetic: "/jɪər/", pos: "n.", translation: "年，年份" }
+  "await": { word: "await", phonetic: "/əˈweɪt/", pos: "v.", translation: "等待，等候" },
+  "award": { word: "award", phonetic: "/əˈwɔːd/", pos: "n./v.", translation: "奖品；授予" },
+  "aware": { word: "aware", phonetic: "/əˈweər/", pos: "adj.", translation: "意识到的，知道的" },
+  "awareness": { word: "awareness", phonetic: "/əˈweə.nəs/", pos: "n.", translation: "意识，认识" },
+  "away": { word: "away", phonetic: "/əˈweɪ/", pos: "adv.", translation: "离开，远离" },
+  "awful": { word: "awful", phonetic: "/ˈɔː.fəl/", pos: "adj.", translation: "可怕的，糟糕的" }
 };
 
-// Memory Cache for Dynamically Fetched Words
-const dynamicDictCache: Record<string, DictEntry> = {};
-
 /**
- * Enhanced Stemming & Lookup Helper
+ * Universal Stemming & Safe Dictionary Lookup Engine
+ * Never returns null, never throws exceptions!
  */
-export function lookupOfflineDict(rawWord: string): DictEntry | null {
-  if (!rawWord) return null;
-  const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
-  if (!cleanWord || cleanWord.length < 1) return null;
-
-  // Check cache first
-  if (dynamicDictCache[cleanWord]) return dynamicDictCache[cleanWord];
-
-  // Exact match
-  if (offlineDict[cleanWord]) return offlineDict[cleanWord];
-
-  // Advanced English suffix & inflection rules
-  const candidates = [
-    cleanWord.replace(/s$/, ''),
-    cleanWord.replace(/es$/, ''),
-    cleanWord.replace(/ed$/, ''),
-    cleanWord.replace(/ing$/, ''),
-    cleanWord.replace(/ly$/, ''),
-    cleanWord.replace(/ingly$/, ''),
-    cleanWord.replace(/tion$/, ''),
-    cleanWord.replace(/ment$/, ''),
-    cleanWord.replace(/al$/, ''),
-    cleanWord.replace(/ic$/, ''),
-    cleanWord.replace(/able$/, ''),
-    cleanWord.replace(/ive$/, ''),
-    cleanWord.replace(/ies$/, 'y'),
-    cleanWord.replace(/ied$/, 'y'),
-    cleanWord.replace(/ing$/, 'e'),
-    cleanWord.replace(/ed$/, 'e'),
-  ];
-
-  for (const c of candidates) {
-    if (c && offlineDict[c]) {
-      return {
-        ...offlineDict[c],
-        word: rawWord
-      };
-    }
+export function lookupOfflineDict(rawWord: string): DictEntry {
+  if (!rawWord) {
+    return { word: "word", pos: "n.", translation: "暂未找到释义" };
   }
 
-  return null;
-}
-
-/**
- * Async Dual-Engine Lookup: Offline Dict + Free Public API Fallback
- */
-export async function fetchWordDefinition(rawWord: string): Promise<DictEntry> {
-  const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
-  
-  // 1. Try Offline Dictionary & Stemming
-  const offlineMatch = lookupOfflineDict(rawWord);
-  if (offlineMatch) {
-    return offlineMatch;
-  }
-
-  // 2. Try Free Public Dictionary API Fallback
   try {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${cleanWord}`);
-    if (response.ok) {
-      const data = await response.json();
-      if (data && data[0]) {
-        const item = data[0];
-        const phonetic = item.phonetic || (item.phonetics && item.phonetics.find((p: any) => p.text)?.text) || `/${cleanWord}/`;
-        const firstMeaning = item.meanings && item.meanings[0];
-        const pos = firstMeaning ? firstMeaning.partOfSpeech + "." : "v./n.";
-        const def = firstMeaning && firstMeaning.definitions && firstMeaning.definitions[0] ? firstMeaning.definitions[0].definition : "";
+    const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
+    if (!cleanWord || cleanWord.length < 1) {
+      return { word: rawWord, pos: "word", translation: `[${rawWord}] 支持点击播放发音` };
+    }
 
-        const entry: DictEntry = {
-          word: rawWord,
-          phonetic: phonetic,
-          pos: pos,
-          translation: def || `[${rawWord}] 支持实时离线发音`
+    // 1. Direct match
+    if (offlineDict[cleanWord]) {
+      return { ...offlineDict[cleanWord], word: rawWord };
+    }
+
+    // 2. Systematic Morphological Stemming Rules
+    const candidates = [
+      cleanWord.replace(/s$/, ''),
+      cleanWord.replace(/es$/, ''),
+      cleanWord.replace(/ed$/, ''),
+      cleanWord.replace(/ing$/, ''),
+      cleanWord.replace(/ly$/, ''),
+      cleanWord.replace(/ingly$/, ''),
+      cleanWord.replace(/tion$/, ''),
+      cleanWord.replace(/sion$/, ''),
+      cleanWord.replace(/ment$/, ''),
+      cleanWord.replace(/al$/, ''),
+      cleanWord.replace(/ic$/, ''),
+      cleanWord.replace(/able$/, ''),
+      cleanWord.replace(/ive$/, ''),
+      cleanWord.replace(/ies$/, 'y'),
+      cleanWord.replace(/ied$/, 'y'),
+      cleanWord.replace(/ing$/, 'e'),
+      cleanWord.replace(/ed$/, 'e'),
+      cleanWord.replace(/er$/, ''),
+      cleanWord.replace(/est$/, ''),
+    ];
+
+    for (const c of candidates) {
+      if (c && offlineDict[c]) {
+        return {
+          ...offlineDict[c],
+          word: rawWord
         };
-
-        // Cache result in memory
-        dynamicDictCache[cleanWord] = entry;
-        return entry;
       }
     }
   } catch (err) {
-    // Network or CORS issue, fallback silently
+    // Prevent any crash
   }
 
-  // 3. Fallback Entry with Pronunciation capability
+  // 3. Guaranteed Safe Fallback Entry
+  const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
   return {
     word: rawWord,
-    phonetic: `/${cleanWord}/`,
+    phonetic: `/${cleanWord || rawWord}/`,
     pos: "word",
-    translation: `[生词: ${rawWord}] 点击喇叭听标准美音`
+    translation: `[生词: ${rawWord}] 支持点击发音聆听标准美音`
   };
+}
+
+/**
+ * Safe Dual Engine Fetch (Async API fallback)
+ */
+export async function fetchWordDefinition(rawWord: string): Promise<DictEntry> {
+  const local = lookupOfflineDict(rawWord);
+  // If local dictionary already has explicit translation
+  if (local && !local.translation.includes("暂未找到释义") && !local.translation.includes("点击发音")) {
+    return local;
+  }
+
+  try {
+    const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
+    if (cleanWord) {
+      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${cleanWord}`);
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data[0]) {
+          const item = data[0];
+          const phonetic = item.phonetic || (item.phonetics && item.phonetics.find((p: any) => p.text)?.text) || `/${cleanWord}/`;
+          const firstMeaning = item.meanings && item.meanings[0];
+          const pos = firstMeaning ? firstMeaning.partOfSpeech + "." : "v./n.";
+          const def = firstMeaning && firstMeaning.definitions && firstMeaning.definitions[0] ? firstMeaning.definitions[0].definition : "";
+
+          if (def) {
+            return {
+              word: rawWord,
+              phonetic: phonetic,
+              pos: pos,
+              translation: def
+            };
+          }
+        }
+      }
+    }
+  } catch (err) {
+    // Silent catch, no white screen
+  }
+
+  return local;
 }
