@@ -1,100 +1,101 @@
-# Agent Instruction: 考研英语一 Reading Assistant Generator
+---
+name: kaoyan-reading-assistant
+description: 考研英语一双语精读与阅读理解生成器。接收英文长文（外刊、真题、新闻），自动提炼考研大纲词汇（带词形变体）、高频短语、长难句语法结构解析及真题风格阅读理解题目，追加至本地归档 src/data/articles.ts 并自动打包生成零依赖可双击打开的单文件 HTML。当用户发送英文文章、PDF 剪贴内容或要求处理考研精读材料时使用。
+---
 
-This repository contains a React-based Bilingual Reading Assistant. Your primary task as an AI Agent is to generate or update the `src/sampleData.ts` file based on English reading materials provided by the user (often pasted from PDFs, The Economist, Nature, etc.).
+# Agent Instruction & Skill: 考研英语一 Reading Assistant Generator
 
-**Crucial Requirement:** The output must strictly align with the difficulty, style, and testing focus of **考研英语一 (China's National Entrance Examination for Postgraduate in English I)**.
+This repository is an AI-Agent-driven Bilingual Reading Assistant designed for **考研英语一 (China's National Entrance Examination for Postgraduate in English I)**.
 
-## 🎯 Core Objectives
+Any AI Agent reading this repository or skill file MUST follow the instructions below to process raw English text into structured reading materials and build offline standalone HTML artifacts.
 
-When the user provides an English article, you must transform it into the structured `ArticleData` format.
+---
+
+## 🎯 Core Objectives & Task Execution
+
+When the user provides an English article or prompt (pasted from The Economist, Nature, LA Times, or past exam papers), you must complete the following 5 steps autonomously:
 
 ### 1. Text Cleanup and Translation (翻译与精读)
-- **Context is King**: Fix any OCR errors or weird line breaks from the user's prompt. 
-- **Refined Translation**: Do not use rigid, machine-like translations. 考研英语 translations require precise understanding of complex clauses, idioms, and formal academic tone. Provide highly accurate, context-aware Chinese translations for each paragraph.
+- **Sanitize Input**: Remove OCR noise, footnote citations (e.g., `[cite: x]`), page numbers, and invalid line breaks.
+- **Academic Translation**: Provide precise, context-aware Chinese translations for each paragraph (`p1`, `p2`, ...). Adhere strictly to the formal academic tone required by 考研英语一.
 
-### 2. Vocabulary & Phrases (考研大纲核心词汇与熟词僻义)
-- **Target Words**: Extract 5-15 words that are core to the 考研英语 syllabus (e.g., formal verbs, abstract nouns, academic adjectives). Pay special attention to **熟词僻义** (familiar words with uncommon meanings in the specific context).
-- **Details**: Provide accurate IPA phonetics, part of speech, exact English definition, and accurate Chinese meaning **in this specific context**.
-- **Contextual Example**: Extract the exact sentence from the article as the `example`.
+### 2. Syllabus Vocabulary & Variants (考研大纲核心词汇与熟词僻义)
+- **Select Words**: Extract 8-15 core syllabus words (formal verbs, abstract nouns, academic adjectives, and **熟词僻义**).
+- **Match Inflections (`variants`)**: Include all inflections (plurals, past tenses, present participles) used in the text inside the `variants` array so the UI's `<TextHighlighter />` highlights them properly.
+- **Structure**:
+  ```typescript
+  {
+    word: "analyze",
+    variants: ["analyzes", "analyzed", "analyzing"],
+    phonetic: "/ˈæn.əl.aɪz/",
+    partOfSpeech: "v.",
+    definition: "to examine detail in order to discover or explain it",
+    chinese: "分析，剖析",
+    example: "Sentence from the text containing analyze.",
+    exampleChinese: "例句对应中文翻译。"
+  }
+  ```
 
-### 3. Grammar Analysis (长难句解析 - Crucial for 考研)
-- **Target Sentences**: Select 2-3 long, complex sentences (长难句) featuring multiple clauses, inversions, omissions, or complex modifiers.
-- **Explanation**: Provide a detailed syntactic analysis in Chinese. Break down the main clause (句子主干), subordinate clauses (从句), and specific grammatical phenomena (e.g., 独立主格, 倒装, 虚拟语气, 介词短语后置).
+### 3. Key Phrases (高频短语)
+- Extract 3-5 key phrases/idioms from the text with Chinese meanings and exact example sentences.
 
-### 4. Comprehension Quiz (考研题型)
-- **Question Types**: Design 2-3 multiple-choice questions matching the 考研 style:
-  - Detail/Fact (细节题)
-  - Main Idea (主旨大意题)
-  - Inference (推理引申题)
-  - Author's Attitude/Tone (作者态度题)
-  - Vocabulary in Context (词义猜测题)
-- **Distractors**: Ensure the incorrect options (干扰项) are plausible and mimic common trap types in the exam (e.g., 正反混淆, 偷换概念, 过度引申, 答非所问).
-- **Explanation**: Provide a detailed explanation for why the correct answer is right and why others are wrong, referencing specific paragraphs.
+### 4. Syntax Breakdown of Complex Sentences (长难句解析 - 考研重点)
+- Select 2-3 long, complex sentences featuring multiple subordinate clauses, inversions, omissions, or complex modifiers.
+- Provide a detailed Chinese syntactic analysis breaking down the main clause (句子主干), subordinate clauses (从句), and specific grammatical structures.
 
-## 📁 Output Format & Archiving (`src/data/articles.ts`)
+### 5. Exam-Style Comprehension Quiz (考研真题阅读理解)
+- Design 3 multiple-choice questions matching 考研题型 (Detail, Inference, Main Idea / Tone).
+- **Distractor Traps**: Ensure incorrect options reflect common exam traps (e.g. 偷换概念, 正反混淆, 过度引申, 答非所问).
+- **Detailed Explanations**: Provide rationale for why the correct answer is right and why distractors are wrong.
 
-You must generate valid TypeScript code adhering to these interfaces defined in `src/types.ts`:
+---
+
+## 📁 Output Target (`src/data/articles.ts`)
+
+Append the newly created `ArticleData` object into `allArticles` array in `src/data/articles.ts` with today's date (`YYYY-MM-DD`). Always place the newest article at the top of `allArticles`:
 
 ```typescript
-export interface Vocabulary {
-  word: string;
-  variants?: string[];  // e.g., ["analyzes", "analyzed", "analyzing"] for text highlighting match
-  phonetic: string;
-  partOfSpeech: string; // e.g., "v.", "n.", "adj."
-  definition: string;   // English definition
-  chinese: string;      // Chinese translation
-  example: string;      // Example sentence from the article
-  exampleChinese: string; // Chinese translation of the example
-}
+export const articleYYYYMMDD: ArticleData = {
+  id: "YYYY-MM-DD",
+  date: "YYYY-MM-DD",
+  title: "Article English Title",
+  difficulty: "考研英语一 (Source)",
+  wordCount: 750,
+  topic: "Category",
+  summary: "Brief summary of the article",
+  paragraphs: [ /* ... */ ],
+  vocabulary: [ /* ... */ ],
+  phrases: [ /* ... */ ],
+  grammarNotes: [ /* ... */ ],
+  quiz: [ /* ... */ ]
+};
 
-export interface Phrase {
-  phrase: string;
-  chinese: string;
-  example: string; // Example sentence from the article
-}
-
-export interface Paragraph {
-  id: string;      // e.g., "p1", "p2"
-  english: string;
-  chinese: string; // High-quality, context-aware Chinese translation
-}
-
-export interface QuizQuestion {
-  question: string;
-  options: string[]; // Array of 4 options
-  correctAnswer: number; // Index of the correct option (0-3)
-  explanation: string; // Detailed explanation of the answer
-}
-
-export interface ArticleData {
-  id?: string;        // e.g., "2026-07-26"
-  date?: string;      // e.g., "2026-07-26"
-  title: string;
-  difficulty: string; // e.g., "考研英语一"
-  wordCount: number;
-  topic: string; // e.g., "Technology", "Science", "Culture"
-  summary: string; // A brief summary of the article
-  paragraphs: Paragraph[];
-  vocabulary: Vocabulary[];
-  phrases: Phrase[];
-  grammarNotes: {
-    sentence: string; // The complex sentence from the text
-    explanation: string; // Grammar analysis in Chinese
-  }[];
-  quiz: QuizQuestion[];
-}
+export const allArticles: ArticleData[] = [
+  articleYYYYMMDD, // Newest article on top
+  // ... previous articles
+];
 ```
 
-## 🛠️ Step-by-Step Daily Workflow
-1. **Receive Input**: Read the user's provided English text.
-2. **Clean & Chunk**: Fix line breaks, merge broken sentences, and format into paragraph chunks.
-3. **Draft Data**: Translate paragraphs, select target vocabulary/phrases (with `variants`), analyze 2-3 long sentences (长难句), and create 考研-style quiz questions.
-4. **Append/Prepend to Archive**: Add the newly generated `ArticleData` object into `allArticles` array in `src/data/articles.ts` with `id` and `date` set to today's date (e.g., `"2026-07-26"`). Place the newest article at the top of `allArticles` so it displays by default.
-5. **Auto-Build Standalone HTML**: Run `npm run build && cp dist/index.html ReadingAssistant.html` so the standalone HTML file `ReadingAssistant.html` at the project root is updated immediately.
+---
 
-## ⚠️ Important System Rules
-- **DO NOT** require the user to run `npm run dev` manually. Always run `npm run build && cp dist/index.html ReadingAssistant.html` after updating article data.
-- The user can double-click `ReadingAssistant.html` directly in any browser without running a server.
-- Add new daily reading materials into `src/data/articles.ts` so users can switch and review past reading materials in the header menu.
-- Ensure `vocab.word` and `vocab.variants` cover inflected forms used in the text so `<TextHighlighter />` correctly highlights them.
-- Ensure all string quotes and special characters are properly escaped in TypeScript.
+## ⚡ Automated Standalone Build Process
+
+After updating `src/data/articles.ts`, **YOU MUST EXECUTE** the following build command in the project directory:
+
+```bash
+npm run build
+```
+
+### What `npm run build` Does Automatically:
+1. Bundles React, Tailwind CSS, Lucide icons, and all article data into a 100% self-contained HTML file via `vite-plugin-singlefile`.
+2. Runs `scripts/archive-build.js` to create a date-named HTML file in the `readings/` folder:
+   `readings/YYYY-MM-DD_Article_Title.html`
+3. Automatically updates `ReadingAssistant.html` at the project root.
+
+---
+
+## ⚠️ System Rules for AI Agents
+
+1. **NO MANDATORY USER TERMINAL COMMANDS**: Do NOT ask the user to run `npm run dev` or `npm run build`. Perform the build command yourself using your command tool after updating `src/data/articles.ts`.
+2. **ZERO-DEPENDENCY SINGLE FILE OUTPUT**: Ensure the generated HTML files in `readings/` and root `ReadingAssistant.html` can be double-clicked directly by the user in any web browser without needing any server.
+3. **ESCAPE SPECIAL CHARACTERS**: Properly escape single quotes, double quotes, and backslashes in TypeScript strings to prevent syntax errors.
