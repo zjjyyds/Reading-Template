@@ -70,16 +70,27 @@ const DictWord = ({
   const [entry, setEntry] = useState<DictEntry | null>(null);
 
   useEffect(() => {
-    if (isOpen && !entry) {
-      setEntry(lookupOfflineDict(word));
+    if (isOpen && (!entry || entry.word !== word)) {
+      // Fast initial offline check
+      const local = lookupOfflineDict(word);
+      setEntry(local);
+      
+      // Async dual-engine fetch if needed
+      fetchWordDefinition(word).then(res => {
+        setEntry(res);
+      });
     }
   }, [isOpen, word, entry]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!isOpen) {
-      setEntry(lookupOfflineDict(word));
+      const local = lookupOfflineDict(word);
+      setEntry(local);
       setActivePopoverId(id);
+      fetchWordDefinition(word).then(res => {
+        setEntry(res);
+      });
     } else {
       setActivePopoverId(null);
     }

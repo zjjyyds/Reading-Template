@@ -6,7 +6,7 @@ export interface DictEntry {
 }
 
 export const offlineDict: Record<string, DictEntry> = {
-  // Common 考研 / Academic / General Vocabulary Dictionary Database
+  // A
   "a": { word: "a", pos: "art.", translation: "一个，一" },
   "an": { word: "an", pos: "art.", translation: "一个，一" },
   "the": { word: "the", pos: "art.", translation: "这个，那个，这些" },
@@ -49,7 +49,6 @@ export const offlineDict: Record<string, DictEntry> = {
   "does": { word: "do", pos: "v.", translation: "做，干（第三人称单数）" },
   "did": { word: "do", pos: "v.", translation: "做，干（过去式）" },
 
-  // A
   "accomplishment": { word: "accomplishment", phonetic: "/əˈkʌm.plɪʃ.mənt/", pos: "n.", translation: "成就，完成" },
   "achievement": { word: "achievement", phonetic: "/əˈtʃiːv.mənt/", pos: "n.", translation: "成就，成绩" },
   "academic": { word: "academic", phonetic: "/ˌæk.əˈdem.ɪk/", pos: "adj.", translation: "学术的，教学的" },
@@ -390,7 +389,7 @@ export const offlineDict: Record<string, DictEntry> = {
   "treatment": { word: "treatment", phonetic: "/ˈtriːt.mənt/", pos: "n.", translation: "治疗，处理" },
   "tunnel": { word: "tunnel", phonetic: "/ˈtʌn.əl/", pos: "n.", translation: "隧道；tunnel vision 管道视野" },
   "turbocharge": { word: "turbocharge", phonetic: "/ˈtɜː.bəʊ.tʃɑːdʒ/", pos: "v.", translation: "加速推动，提速" },
-  "turnaround": { word: "turnaround", phonetic: "/ˈtɜːn.ə.raʊnd/", pos: "n.", translation: "好转，逆转" },
+  "turnaround": { word: "turnaround", phonetic: "/ˈtɜːn.a.raʊnd/", pos: "n.", translation: "好转，逆转" },
   "twin": { word: "twin", phonetic: "/twɪn/", pos: "n./v.", translation: "孪生，双胞胎；数字孪生" },
   "underestimate": { word: "underestimate", phonetic: "/ˌʌn.dəˈres.tɪ.meɪt/", pos: "v.", translation: "低估" },
   "unemployment": { word: "unemployment", phonetic: "/ˌʌn.ɪmˈplɔɪ.mənt/", pos: "n.", translation: "失业，失业率" },
@@ -408,26 +407,37 @@ export const offlineDict: Record<string, DictEntry> = {
   "year": { word: "year", phonetic: "/jɪər/", pos: "n.", translation: "年，年份" }
 };
 
+// Memory Cache for Dynamically Fetched Words
+const dynamicDictCache: Record<string, DictEntry> = {};
+
 /**
- * Fast stemming & lookup helper for offline dict
+ * Enhanced Stemming & Lookup Helper
  */
 export function lookupOfflineDict(rawWord: string): DictEntry | null {
   if (!rawWord) return null;
   const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
   if (!cleanWord || cleanWord.length < 1) return null;
 
+  // Check cache first
+  if (dynamicDictCache[cleanWord]) return dynamicDictCache[cleanWord];
+
   // Exact match
   if (offlineDict[cleanWord]) return offlineDict[cleanWord];
 
-  // Common English suffix stemming rules
+  // Advanced English suffix & inflection rules
   const candidates = [
     cleanWord.replace(/s$/, ''),
     cleanWord.replace(/es$/, ''),
     cleanWord.replace(/ed$/, ''),
     cleanWord.replace(/ing$/, ''),
     cleanWord.replace(/ly$/, ''),
+    cleanWord.replace(/ingly$/, ''),
     cleanWord.replace(/tion$/, ''),
     cleanWord.replace(/ment$/, ''),
+    cleanWord.replace(/al$/, ''),
+    cleanWord.replace(/ic$/, ''),
+    cleanWord.replace(/able$/, ''),
+    cleanWord.replace(/ive$/, ''),
     cleanWord.replace(/ies$/, 'y'),
     cleanWord.replace(/ied$/, 'y'),
     cleanWord.replace(/ing$/, 'e'),
@@ -438,16 +448,59 @@ export function lookupOfflineDict(rawWord: string): DictEntry | null {
     if (c && offlineDict[c]) {
       return {
         ...offlineDict[c],
-        word: rawWord // Keep original clicked word as display header
+        word: rawWord
       };
     }
   }
 
-  // Fallback entry for unmapped words so the user still gets a clean card with pronunciation
+  return null;
+}
+
+/**
+ * Async Dual-Engine Lookup: Offline Dict + Free Public API Fallback
+ */
+export async function fetchWordDefinition(rawWord: string): Promise<DictEntry> {
+  const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
+  
+  // 1. Try Offline Dictionary & Stemming
+  const offlineMatch = lookupOfflineDict(rawWord);
+  if (offlineMatch) {
+    return offlineMatch;
+  }
+
+  // 2. Try Free Public Dictionary API Fallback
+  try {
+    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${cleanWord}`);
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data[0]) {
+        const item = data[0];
+        const phonetic = item.phonetic || (item.phonetics && item.phonetics.find((p: any) => p.text)?.text) || `/${cleanWord}/`;
+        const firstMeaning = item.meanings && item.meanings[0];
+        const pos = firstMeaning ? firstMeaning.partOfSpeech + "." : "v./n.";
+        const def = firstMeaning && firstMeaning.definitions && firstMeaning.definitions[0] ? firstMeaning.definitions[0].definition : "";
+
+        const entry: DictEntry = {
+          word: rawWord,
+          phonetic: phonetic,
+          pos: pos,
+          translation: def || `[${rawWord}] 支持实时离线发音`
+        };
+
+        // Cache result in memory
+        dynamicDictCache[cleanWord] = entry;
+        return entry;
+      }
+    }
+  } catch (err) {
+    // Network or CORS issue, fallback silently
+  }
+
+  // 3. Fallback Entry with Pronunciation capability
   return {
     word: rawWord,
     phonetic: `/${cleanWord}/`,
     pos: "word",
-    translation: `[查词: ${rawWord}] 暂未内置该生词详细义项，支持点击右侧发音`
+    translation: `[生词: ${rawWord}] 点击喇叭听标准美音`
   };
 }
