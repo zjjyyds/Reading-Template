@@ -67,6 +67,26 @@ const DictWord = ({
   setActivePopoverId: (id: string | null) => void;
 }) => {
   const isOpen = activePopoverId === id;
+  const [asyncEntry, setAsyncEntry] = useState<DictEntry | null>(null);
+
+  const localEntry = isOpen ? lookupOfflineDict(word) : null;
+  const entry = asyncEntry || localEntry;
+
+  useEffect(() => {
+    if (isOpen) {
+      if (localEntry && localEntry.translation.includes("生词")) {
+        let isMounted = true;
+        fetchWordDefinition(word).then(res => {
+          if (isMounted && res) {
+            setAsyncEntry(res);
+          }
+        }).catch(() => {});
+        return () => { isMounted = false; };
+      }
+    } else {
+      setAsyncEntry(null);
+    }
+  }, [isOpen, word]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -82,8 +102,6 @@ const DictWord = ({
       window.speechSynthesis.speak(utterance);
     }
   };
-
-  const entry = isOpen ? lookupOfflineDict(word) : null;
 
   return (
     <span className="relative inline-block">
