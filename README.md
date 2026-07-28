@@ -31,13 +31,14 @@ When the user provides an English article, you must transform it into the struct
 - **Distractors**: Ensure the incorrect options (干扰项) are plausible and mimic common trap types in the exam (e.g., 正反混淆, 偷换概念, 过度引申, 答非所问).
 - **Explanation**: Provide a detailed explanation for why the correct answer is right and why others are wrong, referencing specific paragraphs.
 
-## 📁 Output Format (`src/sampleData.ts`)
+## 📁 Output Format & Archiving (`src/data/articles.ts`)
 
 You must generate valid TypeScript code adhering to these interfaces defined in `src/types.ts`:
 
 ```typescript
 export interface Vocabulary {
   word: string;
+  variants?: string[];  // e.g., ["analyzes", "analyzed", "analyzing"] for text highlighting match
   phonetic: string;
   partOfSpeech: string; // e.g., "v.", "n.", "adj."
   definition: string;   // English definition
@@ -66,6 +67,8 @@ export interface QuizQuestion {
 }
 
 export interface ArticleData {
+  id?: string;        // e.g., "2026-07-26"
+  date?: string;      // e.g., "2026-07-26"
   title: string;
   difficulty: string; // e.g., "考研英语一"
   wordCount: number;
@@ -82,14 +85,16 @@ export interface ArticleData {
 }
 ```
 
-## 🛠️ Step-by-Step Workflow
-1. **Receive Input**: Read the user's provided English text and potentially flawed translation.
+## 🛠️ Step-by-Step Daily Workflow
+1. **Receive Input**: Read the user's provided English text.
 2. **Clean & Chunk**: Fix line breaks, merge broken sentences, and format into paragraph chunks.
-3. **Draft Data**: Translate paragraphs, select target vocabulary/phrases, analyze 2-3 long sentences (长难句), and create 考研-style quiz questions.
-4. **Write File**: Overwrite `src/sampleData.ts` with the new valid TypeScript object.
+3. **Draft Data**: Translate paragraphs, select target vocabulary/phrases (with `variants`), analyze 2-3 long sentences (长难句), and create 考研-style quiz questions.
+4. **Append/Prepend to Archive**: Add the newly generated `ArticleData` object into `allArticles` array in `src/data/articles.ts` with `id` and `date` set to today's date (e.g., `"2026-07-26"`). Place the newest article at the top of `allArticles` so it displays by default.
+5. **Auto-Build Standalone HTML**: Run `npm run build && cp dist/index.html ReadingAssistant.html` so the standalone HTML file `ReadingAssistant.html` at the project root is updated immediately.
 
 ## ⚠️ Important System Rules
-- **DO NOT** modify UI components (e.g., `ArticleReader.tsx`) unless specifically requested by the user.
-- **ONLY** modify `src/sampleData.ts` to swap reading materials.
-- Ensure `vocab.word` matches the exact root form or the specific form used in the text so the UI's `<TextHighlighter />` component can correctly highlight it.
+- **DO NOT** require the user to run `npm run dev` manually. Always run `npm run build && cp dist/index.html ReadingAssistant.html` after updating article data.
+- The user can double-click `ReadingAssistant.html` directly in any browser without running a server.
+- Add new daily reading materials into `src/data/articles.ts` so users can switch and review past reading materials in the header menu.
+- Ensure `vocab.word` and `vocab.variants` cover inflected forms used in the text so `<TextHighlighter />` correctly highlights them.
 - Ensure all string quotes and special characters are properly escaped in TypeScript.

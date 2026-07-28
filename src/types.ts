@@ -29,6 +29,8 @@ export interface QuizQuestion {
 }
 
 export interface ArticleData {
+  id?: string;
+  date?: string;
   title: string;
   difficulty: string;
   wordCount: number;
