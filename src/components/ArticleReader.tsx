@@ -1,6 +1,7 @@
 import { ArticleData, Vocabulary } from '../types';
-import { Volume2, FileText, Square } from 'lucide-react';
+import { Volume2, FileText, Square, Search, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { lookupOfflineDict, DictEntry } from '../data/dictionary';
 
 interface Props {
   article: ArticleData;
@@ -31,10 +32,11 @@ const VocabWord = ({ text, vocab }: { text: string; vocab: Vocabulary }) => {
       {isOpen && (
         <span 
           onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[240px] bg-neutral-900 text-white text-sm rounded-xl px-4 py-3 z-20 shadow-xl shadow-black/10"
+          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[260px] bg-neutral-900 text-white text-sm rounded-xl px-4 py-3 z-30 shadow-xl shadow-black/20"
         >
           <span className="block font-bold mb-1">{vocab.word} <span className="font-normal text-neutral-400 font-mono text-xs ml-1">{vocab.phonetic}</span></span>
-          <span className="block text-indigo-200">{vocab.chinese}</span>
+          <span className="block text-indigo-200 mb-1">{vocab.chinese}</span>
+          {vocab.definition && <span className="block text-neutral-300 text-xs italic">{vocab.definition}</span>}
           {/* Little triangle pointer */}
           <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-4 border-transparent border-t-neutral-900"></span>
         </span>
@@ -43,7 +45,50 @@ const VocabWord = ({ text, vocab }: { text: string; vocab: Vocabulary }) => {
   );
 };
 
-const TextHighlighter = ({ text, vocabulary }: { text: string; vocabulary: Vocabulary[] }) => {
+const InteractiveText = ({ 
+  text, 
+  onWordClick 
+}: { 
+  text: string; 
+  onWordClick: (word: string) => void;
+}) => {
+  // Regex to split words while retaining punctuation and whitespace
+  const tokens = text.split(/(\b[a-zA-Z0-9'-]+\b)/g);
+
+  return (
+    <span>
+      {tokens.map((token, idx) => {
+        const isWord = /^[a-zA-Z0-9'-]+$/.test(token) && !/^\d+$/.test(token);
+        if (isWord) {
+          return (
+            <span
+              key={idx}
+              onClick={(e) => {
+                e.stopPropagation();
+                onWordClick(token);
+              }}
+              className="cursor-pointer hover:bg-blue-100 hover:text-blue-900 rounded px-0.5 transition-colors font-serif"
+              title="点击离线查词"
+            >
+              {token}
+            </span>
+          );
+        }
+        return <span key={idx}>{token}</span>;
+      })}
+    </span>
+  );
+};
+
+const TextHighlighter = ({ 
+  text, 
+  vocabulary,
+  onSelectWord
+}: { 
+  text: string; 
+  vocabulary: Vocabulary[];
+  onSelectWord: (word: string) => void;
+}) => {
   const sortedVocab = [...vocabulary].sort((a, b) => b.word.length - a.word.length);
   
   let parts: { text: string; isMatch: boolean; vocab?: Vocabulary }[] = [{ text, isMatch: false }];
@@ -78,7 +123,7 @@ const TextHighlighter = ({ text, vocabulary }: { text: string; vocabulary: Vocab
         part.isMatch && part.vocab ? (
           <VocabWord key={i} text={part.text} vocab={part.vocab} />
         ) : (
-          <span key={i}>{part.text}</span>
+          <InteractiveText key={i} text={part.text} onWordClick={onSelectWord} />
         )
       )}
     </span>
@@ -88,6 +133,21 @@ const TextHighlighter = ({ text, vocabulary }: { text: string; vocabulary: Vocab
 export default function ArticleReader({ article, showChinese }: Props) {
   const [activeParagraph, setActiveParagraph] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
+  const [lookedUpEntry, setLookedUpEntry] = useState<DictEntry | null>(null);
+
+  const speak = (word: string) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  const handleWordClick = (word: string) => {
+    const entry = lookupOfflineDict(word);
+    setLookedUpEntry(entry);
+  };
 
   const toggleSpeak = (text: string, id: string) => {
     if (!('speechSynthesis' in window)) return;
@@ -98,10 +158,8 @@ export default function ArticleReader({ article, showChinese }: Props) {
       return;
     }
 
-    // Always cancel current speech first
     window.speechSynthesis.cancel();
 
-    // Use a small timeout to ensure the previous utterance is fully cancelled in all browsers
     setTimeout(() => {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
@@ -122,7 +180,59 @@ export default function ArticleReader({ article, showChinese }: Props) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-visible">
+    <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-visible relative">
+      {/* Offline Word Lookup Modal */}
+      {lookedUpEntry && (
+        <div 
+          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 flex items-center justify-center p-4"
+          onClick={() => setLookedUpEntry(null)}
+        >
+          <div 
+            className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-neutral-100 relative animate-in fade-in zoom-in-95 duration-150"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              onClick={() => setLookedUpEntry(null)}
+              className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-600 p-1 rounded-full hover:bg-neutral-100 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center justify-between gap-3 mb-3 pr-6">
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <h4 className="text-2xl font-bold text-blue-950 font-serif">{lookedUpEntry.word}</h4>
+                {lookedUpEntry.phonetic && (
+                  <span className="text-sm font-mono text-neutral-500">{lookedUpEntry.phonetic}</span>
+                )}
+                {lookedUpEntry.pos && (
+                  <span className="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded-md">
+                    {lookedUpEntry.pos}
+                  </span>
+                )}
+              </div>
+              <button
+                onClick={() => speak(lookedUpEntry.word)}
+                className="p-2 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-full transition-colors shrink-0"
+                title="读音"
+              >
+                <Volume2 className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="pt-3 border-t border-neutral-100 space-y-2">
+              <div className="text-base font-medium text-neutral-800 leading-relaxed">
+                {lookedUpEntry.translation}
+              </div>
+              <div className="text-xs text-neutral-400 flex items-center gap-1 pt-1">
+                <Search className="w-3.5 h-3.5" />
+                <span>离线词库快速检索结果</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Header */}
       <div className="p-6 md:p-8 border-b border-neutral-100 bg-neutral-50/50">
         <div className="flex gap-2 mb-3">
           <span className="px-2.5 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md">
@@ -149,6 +259,7 @@ export default function ArticleReader({ article, showChinese }: Props) {
         </div>
       </div>
 
+      {/* Article Paragraphs */}
       <div className="p-6 md:p-8 space-y-8">
         {article.paragraphs.map((p, index) => {
           const isActive = activeParagraph === p.id;
@@ -157,7 +268,7 @@ export default function ArticleReader({ article, showChinese }: Props) {
           return (
             <div 
               key={p.id} 
-              className={`group relative p-4 -mx-4 rounded-xl transition-colors cursor-pointer ${isActive ? 'bg-blue-50/50 ring-1 ring-blue-100' : 'hover:bg-neutral-50'}`}
+              className={`group relative p-4 -mx-4 rounded-xl transition-colors ${isActive ? 'bg-blue-50/50 ring-1 ring-blue-100' : 'hover:bg-neutral-50/80'}`}
               onClick={() => setActiveParagraph(isActive ? null : p.id)}
             >
               <div className="flex gap-4">
@@ -182,7 +293,11 @@ export default function ArticleReader({ article, showChinese }: Props) {
                 </div>
                 <div className="flex-1 space-y-3">
                   <p className="text-lg text-neutral-800 leading-relaxed font-serif">
-                    <TextHighlighter text={p.english} vocabulary={article.vocabulary} />
+                    <TextHighlighter 
+                      text={p.english} 
+                      vocabulary={article.vocabulary} 
+                      onSelectWord={handleWordClick}
+                    />
                   </p>
                   
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showChinese ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>
