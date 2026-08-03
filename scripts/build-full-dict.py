@@ -78,21 +78,32 @@ export const offlineDict: Record<string, DictEntry> = {dict_json};
 
 /**
  * Universal Morphological Stemming & Safe Dictionary Lookup Engine
+ * Prototype-safe to prevent any white screen crashes
  */
 export function lookupOfflineDict(rawWord: string): DictEntry {{
-  if (!rawWord) {{
-    return {{ word: "word", pos: "n.", translation: "暂未找到释义" }};
+  const safeDefault: DictEntry = {{
+    word: rawWord || "word",
+    phonetic: `/${{rawWord || "word"}}/`,
+    pos: "word",
+    translation: `[${{rawWord || "word"}}]`
+  }};
+
+  if (!rawWord || typeof rawWord !== 'string') {{
+    return safeDefault;
   }}
 
   try {{
     const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
     if (!cleanWord || cleanWord.length < 1) {{
-      return {{ word: rawWord, pos: "word", translation: `[${{rawWord}}] 点击发音` }};
+      return safeDefault;
     }}
 
-    // 1. Direct match
-    if (offlineDict[cleanWord]) {{
-      return {{ ...offlineDict[cleanWord], word: rawWord }};
+    // 1. Direct match with prototype safety check
+    if (Object.prototype.hasOwnProperty.call(offlineDict, cleanWord)) {{
+      const match = offlineDict[cleanWord];
+      if (match && typeof match === 'object' && typeof match.translation === 'string') {{
+        return {{ ...match, word: rawWord }};
+      }}
     }}
 
     // 2. Systematic Morphological Stemming Rules
@@ -123,25 +134,22 @@ export function lookupOfflineDict(rawWord: string): DictEntry {{
     ];
 
     for (const c of candidates) {{
-      if (c && offlineDict[c]) {{
-        return {{
-          ...offlineDict[c],
-          word: rawWord
-        }};
+      if (c && Object.prototype.hasOwnProperty.call(offlineDict, c)) {{
+        const match = offlineDict[c];
+        if (match && typeof match === 'object' && typeof match.translation === 'string') {{
+          return {{
+            ...match,
+            word: rawWord
+          }};
+        }}
       }}
     }}
   }} catch (err) {{
-    // Prevent any crash
+    return safeDefault;
   }}
 
-  // 3. Fallback Entry
-  const cleanWord = rawWord.trim().toLowerCase().replace(/[^a-z-]/g, '');
-  return {{
-    word: rawWord,
-    phonetic: `/${{cleanWord || rawWord}}/`,
-    pos: "word",
-    translation: `[生词: ${{rawWord}}] 点击播放美音朗读`
-  }};
+  // 3. Fallback Entry (Never crashes)
+  return safeDefault;
 }}
 
 export async function fetchWordDefinition(rawWord: string): Promise<DictEntry> {{

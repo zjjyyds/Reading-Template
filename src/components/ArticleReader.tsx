@@ -54,7 +54,7 @@ const VocabWord = ({
   );
 };
 
-// General Clickable Word Popover Component
+// General Clickable Word Popover Component (100% Crash-Proof)
 const DictWord = ({ 
   word, 
   id, 
@@ -67,48 +67,54 @@ const DictWord = ({
   setActivePopoverId: (id: string | null) => void;
 }) => {
   const isOpen = activePopoverId === id;
-  const [asyncEntry, setAsyncEntry] = useState<DictEntry | null>(null);
-
-  const localEntry = isOpen ? lookupOfflineDict(word) : null;
-  const entry = asyncEntry || localEntry;
-
-  useEffect(() => {
-    if (isOpen) {
-      if (localEntry && localEntry.translation.includes("生词")) {
-        let isMounted = true;
-        fetchWordDefinition(word).then(res => {
-          if (isMounted && res) {
-            setAsyncEntry(res);
-          }
-        }).catch(() => {});
-        return () => { isMounted = false; };
-      }
-    } else {
-      setAsyncEntry(null);
-    }
-  }, [isOpen, word]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setActivePopoverId(isOpen ? null : id);
+    try {
+      setActivePopoverId(isOpen ? null : id);
+    } catch (err) {
+      // Ignore
+    }
   };
 
   const speak = (e: React.MouseEvent, w: string) => {
     e.stopPropagation();
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(w);
-      utterance.lang = 'en-US';
-      window.speechSynthesis.speak(utterance);
+    try {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(w);
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+      }
+    } catch (err) {
+      // Ignore TTS errors
     }
   };
+
+  // Safe lookup with guaranteed non-null fields
+  let entry: DictEntry = { word, phonetic: `/${word}/`, pos: '', translation: `[${word}]` };
+  if (isOpen) {
+    try {
+      const res = lookupOfflineDict(word);
+      if (res && typeof res === 'object') {
+        entry = {
+          word: res.word || word,
+          phonetic: res.phonetic || `/${word}/`,
+          pos: res.pos || '',
+          translation: res.translation || `[${word}]`
+        };
+      }
+    } catch (err) {
+      entry = { word, phonetic: `/${word}/`, pos: '', translation: `[${word}]` };
+    }
+  }
 
   return (
     <span className="relative inline-block">
       <span 
         onClick={handleClick}
         className="cursor-pointer hover:bg-blue-100 hover:text-blue-900 rounded px-0.5 transition-colors font-serif"
-        title="点击查词"
+        title="点击发音/显示释义"
       >
         {word}
       </span>
