@@ -1,35 +1,34 @@
 import { ArticleData, Vocabulary } from '../types';
 import { Volume2, FileText, Square } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { lookupOfflineDict, DictEntry } from '../data/dictionary';
+import { useState, useEffect, useRef } from 'react';
 
 interface Props {
   article: ArticleData;
   showChinese: boolean;
 }
 
-// Target Vocabulary Popover Component (Indigo Highlight)
-const VocabWord = ({ 
-  text, 
-  vocab, 
-  id, 
-  activePopoverId, 
-  setActivePopoverId 
-}: { 
-  text: string; 
-  vocab: Vocabulary;
-  id: string;
-  activePopoverId: string | null;
-  setActivePopoverId: (id: string | null) => void;
-}) => {
-  const isOpen = activePopoverId === id;
+const VocabWord = ({ text, vocab }: { text: string; vocab: Vocabulary }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const wordRef = useRef<HTMLSpanElement>(null);
+  const [showBelow, setShowBelow] = useState(false);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    if (wordRef.current) {
+      const rect = wordRef.current.getBoundingClientRect();
+      setShowBelow(rect.top < 150);
+    }
+    const close = () => setIsOpen(false);
+    window.addEventListener('click', close);
+    return () => window.removeEventListener('click', close);
+  }, [isOpen]);
 
   return (
-    <span className="relative inline-block">
+    <span ref={wordRef} className="relative inline-block">
       <span 
         onClick={(e) => {
           e.stopPropagation();
-          setActivePopoverId(isOpen ? null : id);
+          setIsOpen(!isOpen);
         }}
         className="text-indigo-700 bg-indigo-50 border-b-2 border-indigo-200 cursor-pointer px-0.5 rounded transition-colors hover:bg-indigo-100 font-medium"
       >
@@ -38,169 +37,25 @@ const VocabWord = ({
       {isOpen && (
         <span 
           onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[280px] bg-neutral-900 text-white text-sm rounded-xl px-4 py-3 z-30 shadow-xl shadow-black/20 text-left pointer-events-auto"
+          className={`absolute left-1/2 -translate-x-1/2 w-max max-w-[280px] bg-neutral-900 text-white text-sm rounded-xl px-4 py-3 z-30 shadow-xl shadow-black/20 text-left ${
+            showBelow ? 'top-full mt-2' : 'bottom-full mb-2'
+          }`}
         >
-          <span className="block font-bold mb-1">
-            {vocab.word} 
-            {vocab.phonetic && <span className="font-normal text-neutral-400 font-mono text-xs ml-1.5">{vocab.phonetic}</span>}
-          </span>
-          <span className="block text-indigo-200 mb-1">{vocab.chinese}</span>
-          {vocab.definition && <span className="block text-neutral-300 text-xs italic">{vocab.definition}</span>}
-          {/* Triangle Pointer */}
-          <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-4 border-transparent border-t-neutral-900"></span>
+          <span className="block font-bold mb-1">{vocab.word} <span className="font-normal text-neutral-400 font-mono text-xs ml-1">{vocab.phonetic}</span></span>
+          <span className="block text-indigo-200">{vocab.chinese}</span>
+          {/* Triangle pointer */}
+          <span className={`absolute left-1/2 -translate-x-1/2 border-4 border-transparent ${
+            showBelow 
+              ? 'bottom-full -mb-0.5 border-b-neutral-900' 
+              : 'top-full -mt-0.5 border-t-neutral-900'
+          }`}></span>
         </span>
       )}
     </span>
   );
 };
 
-// General Clickable Word Popover Component (100% Crash-Proof)
-const DictWord = ({ 
-  word, 
-  id, 
-  activePopoverId, 
-  setActivePopoverId 
-}: { 
-  word: string;
-  id: string;
-  activePopoverId: string | null;
-  setActivePopoverId: (id: string | null) => void;
-}) => {
-  const isOpen = activePopoverId === id;
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    try {
-      setActivePopoverId(isOpen ? null : id);
-    } catch (err) {
-      // Ignore
-    }
-  };
-
-  const speak = (e: React.MouseEvent, w: string) => {
-    e.stopPropagation();
-    try {
-      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(w);
-        utterance.lang = 'en-US';
-        window.speechSynthesis.speak(utterance);
-      }
-    } catch (err) {
-      // Ignore TTS errors
-    }
-  };
-
-  // Safe lookup with guaranteed non-null fields
-  let entry: DictEntry = { word, phonetic: `/${word}/`, pos: '', translation: `[${word}]` };
-  if (isOpen) {
-    try {
-      const res = lookupOfflineDict(word);
-      if (res && typeof res === 'object') {
-        entry = {
-          word: res.word || word,
-          phonetic: res.phonetic || `/${word}/`,
-          pos: res.pos || '',
-          translation: res.translation || `[${word}]`
-        };
-      }
-    } catch (err) {
-      entry = { word, phonetic: `/${word}/`, pos: '', translation: `[${word}]` };
-    }
-  }
-
-  return (
-    <span className="relative inline-block">
-      <span 
-        onClick={handleClick}
-        className="cursor-pointer hover:bg-blue-100 hover:text-blue-900 rounded px-0.5 transition-colors font-serif"
-        title="点击发音/显示释义"
-      >
-        {word}
-      </span>
-      {isOpen && entry && (
-        <span 
-          onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-[280px] bg-neutral-900 text-white text-sm rounded-xl px-4 py-3 z-30 shadow-xl shadow-black/20 text-left pointer-events-auto"
-        >
-          <span className="flex items-center justify-between gap-3 mb-1">
-            <span className="font-bold text-white text-base">
-              {entry.word}
-            </span>
-            <button 
-              onClick={(e) => speak(e, entry.word)}
-              className="text-neutral-400 hover:text-blue-400 p-0.5 shrink-0"
-              title="朗读"
-            >
-              <Volume2 className="w-4 h-4" />
-            </button>
-          </span>
-          
-          <div className="flex items-center gap-2 mb-1">
-            {entry.phonetic && <span className="font-mono text-neutral-400 text-xs">{entry.phonetic}</span>}
-            {entry.pos && <span className="px-1.5 py-0.5 text-[10px] font-semibold bg-blue-900 text-blue-200 rounded">{entry.pos}</span>}
-          </div>
-
-          <span className="block text-indigo-200 text-sm font-sans">{entry.translation}</span>
-          
-          {/* Triangle Pointer */}
-          <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-4 border-transparent border-t-neutral-900"></span>
-        </span>
-      )}
-    </span>
-  );
-};
-
-const InteractiveText = ({ 
-  text,
-  pIndex,
-  tokenOffset,
-  activePopoverId,
-  setActivePopoverId
-}: { 
-  text: string;
-  pIndex: number;
-  tokenOffset: number;
-  activePopoverId: string | null;
-  setActivePopoverId: (id: string | null) => void;
-}) => {
-  const tokens = text.split(/(\b[a-zA-Z0-9'-]+\b)/g);
-
-  return (
-    <span>
-      {tokens.map((token, idx) => {
-        const isWord = /^[a-zA-Z0-9'-]+$/.test(token) && !/^\d+$/.test(token);
-        const uniqueId = `word-${pIndex}-${tokenOffset}-${idx}-${token}`;
-        if (isWord) {
-          return (
-            <DictWord 
-              key={uniqueId} 
-              word={token} 
-              id={uniqueId}
-              activePopoverId={activePopoverId}
-              setActivePopoverId={setActivePopoverId}
-            />
-          );
-        }
-        return <span key={idx}>{token}</span>;
-      })}
-    </span>
-  );
-};
-
-const TextHighlighter = ({ 
-  text, 
-  vocabulary,
-  pIndex,
-  activePopoverId,
-  setActivePopoverId
-}: { 
-  text: string; 
-  vocabulary: Vocabulary[];
-  pIndex: number;
-  activePopoverId: string | null;
-  setActivePopoverId: (id: string | null) => void;
-}) => {
+const TextHighlighter = ({ text, vocabulary }: { text: string; vocabulary: Vocabulary[] }) => {
   const sortedVocab = [...vocabulary].sort((a, b) => b.word.length - a.word.length);
   
   let parts: { text: string; isMatch: boolean; vocab?: Vocabulary }[] = [{ text, isMatch: false }];
@@ -231,28 +86,13 @@ const TextHighlighter = ({
 
   return (
     <span>
-      {parts.map((part, i) => {
-        const uniqueId = `vocab-${pIndex}-${i}-${part.text}`;
-        return part.isMatch && part.vocab ? (
-          <VocabWord 
-            key={uniqueId} 
-            text={part.text} 
-            vocab={part.vocab}
-            id={uniqueId}
-            activePopoverId={activePopoverId}
-            setActivePopoverId={setActivePopoverId}
-          />
+      {parts.map((part, i) => 
+        part.isMatch && part.vocab ? (
+          <VocabWord key={i} text={part.text} vocab={part.vocab} />
         ) : (
-          <InteractiveText 
-            key={i} 
-            text={part.text} 
-            pIndex={pIndex}
-            tokenOffset={i}
-            activePopoverId={activePopoverId}
-            setActivePopoverId={setActivePopoverId}
-          />
-        );
-      })}
+          <span key={i}>{part.text}</span>
+        )
+      )}
     </span>
   );
 };
@@ -260,15 +100,6 @@ const TextHighlighter = ({
 export default function ArticleReader({ article, showChinese }: Props) {
   const [activeParagraph, setActiveParagraph] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<string | null>(null);
-  const [activePopoverId, setActivePopoverId] = useState<string | null>(null);
-
-  // Close active popover when clicking anywhere outside
-  useEffect(() => {
-    if (!activePopoverId) return;
-    const handleGlobalClick = () => setActivePopoverId(null);
-    window.addEventListener('click', handleGlobalClick);
-    return () => window.removeEventListener('click', handleGlobalClick);
-  }, [activePopoverId]);
 
   const toggleSpeak = (text: string, id: string) => {
     if (!('speechSynthesis' in window)) return;
@@ -279,8 +110,10 @@ export default function ArticleReader({ article, showChinese }: Props) {
       return;
     }
 
+    // Always cancel current speech first
     window.speechSynthesis.cancel();
 
+    // Use a small timeout to ensure the previous utterance is fully cancelled in all browsers
     setTimeout(() => {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'en-US';
@@ -301,8 +134,7 @@ export default function ArticleReader({ article, showChinese }: Props) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-visible relative">
-      {/* Header */}
+    <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-visible">
       <div className="p-6 md:p-8 border-b border-neutral-100 bg-neutral-50/50">
         <div className="flex gap-2 mb-3">
           <span className="px-2.5 py-1 text-xs font-semibold bg-blue-100 text-blue-700 rounded-md">
@@ -329,7 +161,6 @@ export default function ArticleReader({ article, showChinese }: Props) {
         </div>
       </div>
 
-      {/* Article Paragraphs */}
       <div className="p-6 md:p-8 space-y-8">
         {article.paragraphs.map((p, index) => {
           const isActive = activeParagraph === p.id;
@@ -338,7 +169,7 @@ export default function ArticleReader({ article, showChinese }: Props) {
           return (
             <div 
               key={p.id} 
-              className={`group relative p-4 -mx-4 rounded-xl transition-colors ${isActive ? 'bg-blue-50/50 ring-1 ring-blue-100' : 'hover:bg-neutral-50/80'}`}
+              className={`group relative p-4 -mx-4 rounded-xl transition-colors cursor-pointer ${isActive ? 'bg-blue-50/50 ring-1 ring-blue-100' : 'hover:bg-neutral-50'}`}
               onClick={() => setActiveParagraph(isActive ? null : p.id)}
             >
               <div className="flex gap-4">
@@ -363,13 +194,7 @@ export default function ArticleReader({ article, showChinese }: Props) {
                 </div>
                 <div className="flex-1 space-y-3">
                   <p className="text-lg text-neutral-800 leading-relaxed font-serif">
-                    <TextHighlighter 
-                      text={p.english} 
-                      vocabulary={article.vocabulary} 
-                      pIndex={index}
-                      activePopoverId={activePopoverId}
-                      setActivePopoverId={setActivePopoverId}
-                    />
+                    <TextHighlighter text={p.english} vocabulary={article.vocabulary} />
                   </p>
                   
                   <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showChinese ? 'opacity-100 h-auto' : 'opacity-0 h-0'}`}>
